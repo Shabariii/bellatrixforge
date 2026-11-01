@@ -4,113 +4,259 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Bellatrix Forge Studios</title>
-<meta name="description" content="Bellatrix Forge Studios is an independent game studio from Brazil. Games forged under a blue star: BELLATRIX, Witch Doctor's Hut, and more to come.">
+<meta name="description" content="From the ashes of creation, from the anvils of existence. Bellatrix Forge Studios, an independent game studio from Brazil: BELLATRIX, Witch Doctor's Hut, and more on the anvil.">
 <meta property="og:title" content="Bellatrix Forge Studios">
-<meta property="og:description" content="Games forged under a blue star.">
-<meta property="og:image" content="img/studio_sky.webp">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 4 58 42 96 50 58 58 50 96 42 58 4 50 42 42Z' fill='%23e7b85a'/%3E%3C/svg%3E">
+<meta property="og:description" content="We do not rush what we forge.">
+<meta property="og:image" content="film/studio_entry_end.jpg">
+<link rel="icon" href="img/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="forge.css">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800;900&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root { --night:#050609; --gold:#e8b75a; --gold-hi:#fff0c2; --gold-dk:#7d5a20; --blue:#6cc0ff; --ember:#ff7b2c; --bone:#ece3cf; --dim:#8e8676; }
+* { box-sizing:border-box; }
+html, body { margin:0; background:var(--night); color:var(--bone); }
+body { font:17px/1.65 Inter, sans-serif; overflow-x:hidden; }
+::selection { background:var(--gold); color:#000; }
+a { color:inherit; }
+img { display:block; max-width:100%; }
+
+.bar { position:fixed; inset:0 0 auto; z-index:50; display:flex; justify-content:space-between; align-items:center; padding:16px clamp(16px,4vw,56px); }
+.bar a { text-decoration:none; font:600 12px Cinzel, serif; letter-spacing:.28em; text-transform:uppercase; color:var(--bone); opacity:.8; margin-left:26px; }
+.bar a:hover { opacity:1; color:var(--gold); }
+.bar .brand { margin:0; display:flex; align-items:center; gap:10px; opacity:1; color:var(--gold); }
+.bar .brand img { width:26px; }
+.progress { position:fixed; left:0; top:0; height:2px; width:100%; transform-origin:0 50%; transform:scaleX(0); background:linear-gradient(90deg,var(--gold-dk),var(--gold),var(--blue)); z-index:60; }
+
+.film { position:relative; height:100vh; overflow:hidden; background:#000; }
+.film video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.film .veil { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 50%, transparent 40%, #000c 100%); pointer-events:none; }
+.lines { position:absolute; left:0; right:0; bottom:9vh; height:5em; pointer-events:none; }
+.lines p { position:absolute; left:50%; bottom:0; width:min(1100px,92vw); transform:translateX(-50%); margin:0; opacity:0; text-align:center;
+  font:500 clamp(22px,2.7vw,40px)/1.3 "Cormorant Garamond", serif; font-style:italic; color:var(--gold-hi); text-shadow:0 2px 24px #000; }
+.hint { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); font:600 11px Cinzel, serif; letter-spacing:.4em; color:var(--gold); animation:breathe 2.6s ease-in-out infinite; }
+@keyframes breathe { 50% { opacity:.25; } }
+
+.oath { min-height:100vh; display:grid; place-items:center; padding:12vh 16px; background:radial-gradient(ellipse at 50% 60%, #ff7b2c12, transparent 60%); }
+.oath ol { list-style:none; margin:0; padding:0; text-align:center; }
+.oath li { font:800 clamp(24px,4.2vw,72px)/1.12 Cinzel, serif; margin:.18em 0; }
+.oath .w { color:#2a2620; }
+.oath .sign { margin-top:6vh; text-align:center; font:500 clamp(18px,1.8vw,26px) "Cormorant Garamond", serif; font-style:italic; color:var(--gold); letter-spacing:.06em; opacity:0; }
+
+.chapter { padding:14vh clamp(16px,6vw,96px) 8vh; max-width:1700px; margin:auto; }
+.eyebrow { font:600 12px Cinzel, serif; letter-spacing:.45em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:18px; }
+.eyebrow::after { content:""; height:1px; flex:0 0 120px; background:linear-gradient(90deg,var(--gold),transparent); }
+.chapter h2 { font:900 clamp(44px,8vw,140px)/.95 Cinzel, serif; margin:.25em 0 .2em; color:var(--gold-hi); letter-spacing:.02em; }
+.split { display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(24px,5vw,100px); align-items:end; }
+.split .lede { font:500 clamp(22px,2.2vw,34px)/1.35 "Cormorant Garamond", serif; margin:0; }
+.split p { color:#c9c0ac; margin:0 0 1em; }
+.btns { display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
+.btn { position:relative; isolation:isolate; overflow:hidden; text-decoration:none; font:700 13px Cinzel, serif; letter-spacing:.24em; text-transform:uppercase; padding:16px 30px; border:1px solid var(--gold); color:var(--gold-hi); }
+.btn::before { content:""; position:absolute; inset:0; background:var(--gold); transform:translateY(101%); transition:transform .45s cubic-bezier(.7,0,.2,1); z-index:-1; }
+.btn:hover { color:#120d05; } .btn:hover::before { transform:none; }
+.btn.ghost { border-color:#ffffff33; color:var(--dim); pointer-events:none; }
+.reveal { opacity:0; transform:translateY(40px); }
+
+.rail { height:100vh; overflow:hidden; display:flex; align-items:center; }
+.track { display:flex; gap:3vw; padding:0 8vw; will-change:transform; }
+.track figure { margin:0; flex:0 0 min(62vw,1100px); }
+.track img { width:100%; aspect-ratio:16/9; object-fit:cover; border:1px solid #e8b75a44; box-shadow:0 30px 80px #000; }
+.track figcaption { margin-top:12px; font:600 12px Cinzel, serif; letter-spacing:.3em; text-transform:uppercase; color:var(--dim); }
+
+.hut { position:relative; height:100vh; overflow:hidden; }
+.hut .art { position:absolute; inset:0; background:url(img/wdh_key.webp) center 35%/cover; clip-path:circle(8% at 56% 58%); transform:scale(1.35); }
+.hut .shade { position:absolute; inset:0; background:linear-gradient(0deg,#050609 4%,transparent 45%); }
+.hut .copy { position:absolute; left:clamp(16px,6vw,96px); right:clamp(16px,6vw,96px); bottom:9vh; max-width:820px; }
+.hut h2 { font:900 clamp(40px,7vw,120px)/.95 Cinzel, serif; margin:.2em 0; color:#dff7b0; text-shadow:0 4px 40px #000; }
+.hut p { font-size:19px; color:#e7e0cc; text-shadow:0 2px 12px #000; }
+
+.tbc { min-height:100vh; display:grid; place-items:center; text-align:center; overflow:hidden; padding:10vh 16px; }
+.ingot { width:min(520px,70vw); aspect-ratio:3/1; border-radius:6px; background:radial-gradient(ellipse at 50% 40%,#ffe0a8,#ff8a3a 30%,#b2380c 60%,#3a1406 100%);
+  box-shadow:0 0 120px #ff7b2c88, 0 0 30px #ffb06a; animation:cool 6s ease-in-out infinite; margin:0 auto 6vh; }
+@keyframes cool { 50% { filter:brightness(.55) saturate(.7); box-shadow:0 0 50px #ff7b2c44; } }
+.tbc h2 { font:900 clamp(40px,7vw,110px)/1 Cinzel, serif; margin:0; color:#ffcf9a; }
+.tbc p { font:500 clamp(20px,2vw,28px) "Cormorant Garamond", serif; font-style:italic; color:var(--dim); }
+
+.fire { padding:16vh 16px 18vh; text-align:center; background:radial-gradient(ellipse at 50% 100%,#ff7b2c22,transparent 65%); }
+.fire h2 { font:900 clamp(36px,5.5vw,90px)/1 Cinzel, serif; color:var(--gold-hi); margin:0 0 .3em; }
+.fire p { max-width:760px; margin:0 auto; color:#c9c0ac; font-size:19px; }
+.fire .btns, .fire .eyebrow { justify-content:center; }
+
+footer { padding:60px 16px 70px; text-align:center; border-top:1px solid #e8b75a22; color:var(--dim); font-size:14px; }
+footer img { width:150px; margin:0 auto 18px; }
+footer nav a { margin:0 12px; font:600 12px Cinzel, serif; letter-spacing:.25em; text-transform:uppercase; text-decoration:none; color:var(--gold); }
+
+@media (max-width:820px) { .bar nav { display:none; } .split { grid-template-columns:1fr; } .track figure { flex-basis:84vw; } }
+@media (prefers-reduced-motion:reduce) { .reveal { opacity:1; transform:none; } .oath .w { color:var(--gold-hi); } .oath .sign { opacity:1; } }
+</style>
 </head>
 <body>
-<nav class="top">
-  <a class="mark" href="./"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 58 42 96 50 58 58 50 96 42 58 4 50 42 42Z"/></svg>Bellatrix Forge</a>
-  <div><a href="#games">Games</a><a href="#forge">The Forge</a><a href="#support">Support</a></div>
-</nav>
-
-<header class="hero">
-  <div class="sky" style="background-image:url(img/space.webp)"></div>
-  <canvas id="sparks" aria-hidden="true"></canvas>
-  <img class="logo" src="img/studio_logo.webp" alt="Bellatrix Forge Studios: an anvil struck by a blue star" width="900" height="888">
-  <p class="tag">Games forged under a blue star.</p>
-  <a class="down" href="#games" aria-label="See our games">&#8595;</a>
+<div class="progress"></div>
+<header class="bar">
+  <a class="brand" href="#top"><img src="img/icon.png" alt="">Bellatrix Forge</a>
+  <nav><a href="#bellatrix">Bellatrix</a><a href="#hut">Witch Doctor's Hut</a><a href="#fire">Support</a></nav>
 </header>
 
-<main>
-<section id="games">
-  <div class="rule"><span>Our Games</span></div>
-  <div class="plaques">
-    <a class="plaque" href="bellatrix/">
-      <div class="art" style="background-image:url(img/bx_02_boss_the_bastion.webp)"></div>
-      <div class="rivets"></div>
-      <div class="body">
-        <span class="status live">Demo soon &middot; Steam coming</span>
-        <h2>BELLATRIX</h2>
-        <p>A survivors-like space shooter. The blue giant of Orion is changing, the fleet has turned on us, and one pilot launches with ECHO in her ear.</p>
-        <span class="go">Enter the Wake &#8594;</span>
-      </div>
-    </a>
-    <a class="plaque" href="witch-doctors-hut/">
-      <div class="art" style="background-image:url(img/wdh_key.webp)"></div>
-      <div class="rivets"></div>
-      <div class="body">
-        <span class="status live">Free on itch &middot; soon</span>
-        <h2>WITCH DOCTOR'S HUT</h2>
-        <p>A blue troll brews gross potions on your taskbar. A skull roasts him. You type, the pot stirs, the troll regrets everything.</p>
-        <span class="go">Visit the hut &#8594;</span>
-      </div>
-    </a>
-    <div class="plaque ingot" aria-label="Next game, to be confirmed">
-      <div class="glow"></div>
-      <div class="rivets"></div>
-      <div class="body">
-        <span class="status">Still on the anvil</span>
-        <h2>To Be Confirmed</h2>
-        <p>The next one is cooling. We do not show half-forged steel.</p>
-        <span class="stamp">TBC</span>
-      </div>
-    </div>
+<section class="film" id="top" data-film="film/studio_entry.mp4" data-scroll="320">
+  <video muted playsinline preload="auto" poster="film/studio_entry_end.jpg"></video>
+  <div class="veil"></div>
+  <div class="lines">
+    <p>From the ashes of creation, from the anvils of existence,</p>
+    <p>Bellatrix Forge Studios was molded and crafted with care.</p>
+    <p>We tend the ancient fire and give our souls so it may burn throughout the generations yet to come.</p>
+  </div>
+  <div class="hint">SCROLL TO STRIKE</div>
+</section>
+
+<section class="oath">
+  <div>
+    <ol>
+      <li>We do not rush what we forge.</li>
+      <li>We do not yield what we have not proven.</li>
+      <li>We do not bow to haste.</li>
+      <li>We do not rest while the fire still burns.</li>
+    </ol>
+    <p class="sign">By might and steel, now and always.</p>
   </div>
 </section>
 
-<section id="forge" class="forge">
-  <div class="rule"><span>The Forge</span></div>
-  <div class="two">
-    <p class="lede">Bellatrix is the warrior star on Orion's shoulder, the blue giant that names our first game and our studio.</p>
+<section class="film" id="bellatrix" data-film="film/title_reveal.mp4" data-scroll="300">
+  <video muted playsinline preload="auto" poster="film/title_reveal_end.jpg"></video>
+  <div class="veil"></div>
+  <div class="lines">
+    <p>Bellatrix, the blue giant of Orion, is changing.</p>
+    <p>Something in the belt is corrupting the change, and our own fleet has turned.</p>
+    <p>One pilot launches. ECHO speaks in her ear.</p>
+  </div>
+</section>
+<div class="chapter">
+  <div class="eyebrow reveal">Our first game</div>
+  <div class="split">
     <div>
-      <p>We are a small independent studio from Brazil. We make games with a voice of their own: a pilot and her guardian under a dying star, a troll and a skull arguing in a swamp hut.</p>
-      <p>Every game is hand-directed, tested by bots and by people, and shipped only when it feels right.</p>
+      <h2 class="reveal">BELLATRIX</h2>
+      <p class="lede reveal">A space-opera bullet heaven. Fly a fighter with real momentum through a dying star.</p>
     </div>
+    <div class="reveal">
+      <p>Every level-up offers a hull module, a passive or a skill: flak that airbursts, lightning that chains, plasma that burns. Every level ends against a named fortress, THE BASTION, THE ARMORY, AEGIS REVENANT, and between runs the Starforge turns stardust into the stars of a growing constellation.</p>
+      <div class="btns">
+        <a class="btn" href="https://pixelforgestudiosgames.itch.io/bellatrix" target="_blank" rel="noopener">Play the free demo</a>
+        <span class="btn ghost">Steam: coming</span>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="rail" aria-label="BELLATRIX screenshots">
+  <div class="track">
+    <figure><img loading="lazy" src="img/bx_01_swarm.webp" alt=""><figcaption>The swarm</figcaption></figure>
+    <figure><img loading="lazy" src="img/bx_02_boss_the_bastion.webp" alt=""><figcaption>The Bastion</figcaption></figure>
+    <figure><img loading="lazy" src="img/bx_05_level_up_cards.webp" alt=""><figcaption>Choose your module</figcaption></figure>
+    <figure><img loading="lazy" src="img/bx_03_boss_the_armory.webp" alt=""><figcaption>The Armory</figcaption></figure>
+    <figure><img loading="lazy" src="img/bx_08_warp_corridor.webp" alt=""><figcaption>The warp</figcaption></figure>
+    <figure><img loading="lazy" src="img/bx_06_campaign_map.webp" alt=""><figcaption>The campaign</figcaption></figure>
+    <figure><img loading="lazy" src="img/bx_11_starforge.webp" alt=""><figcaption>The Starforge</figcaption></figure>
   </div>
 </section>
 
-<section id="support" class="support">
-  <div class="rule"><span>Feed the Fire</span></div>
-  <p class="lede center">A crowdfunding page is coming, so players can help us keep the forge lit.</p>
-  <p class="center small">Until then, the best help is free: wishlist, play the demos, and tell a friend.</p>
+<section class="hut" id="hut">
+  <div class="art"></div><div class="shade"></div>
+  <div class="copy">
+    <div class="eyebrow">From the swamp</div>
+    <h2>Witch Doctor's Hut</h2>
+    <p>A blue troll brews gross potions on your taskbar. A skull roasts him. You type, the pot stirs, the troll regrets everything.</p>
+    <div class="btns"><a class="btn" href="witch-doctors-hut/">Enter the hut</a></div>
+  </div>
 </section>
-</main>
+
+<section class="tbc">
+  <div>
+    <div class="ingot" aria-hidden="true"></div>
+    <div class="eyebrow reveal" style="justify-content:center">Still on the anvil</div>
+    <h2 class="reveal">To Be Confirmed</h2>
+    <p class="reveal">The next one is cooling. We do not show half-forged steel.</p>
+  </div>
+</section>
+
+<section class="fire" id="fire">
+  <div class="eyebrow reveal">Keep the forge lit</div>
+  <h2 class="reveal">Feed the Fire</h2>
+  <p class="reveal">A crowdfunding page opens soon, so players can help us keep the fire burning. Until then, the best help is free: play the demo, follow the forge, tell a friend.</p>
+  <div class="btns reveal">
+    <a class="btn" href="https://pixelforgestudiosgames.itch.io" target="_blank" rel="noopener">Our games on itch</a>
+    <a class="btn" href="https://www.youtube.com/@PixelForgeStudios-z7y" target="_blank" rel="noopener">Watch the forge</a>
+  </div>
+</section>
 
 <footer>
-  <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 58 42 96 50 58 58 50 96 42 58 4 50 42 42Z"/></svg>
+  <img src="img/studio_lockup.webp" alt="Bellatrix Forge Studios">
+  <nav><a href="https://pixelforgestudiosgames.itch.io" target="_blank" rel="noopener">itch.io</a><a href="https://www.youtube.com/@PixelForgeStudios-z7y" target="_blank" rel="noopener">YouTube</a></nav>
   <p>&copy; 2026 Bellatrix Forge Studios &middot; Made in Brazil</p>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
-// Sparks rising from the anvil: one canvas, few particles, paused when hidden or reduced motion.
-(() => {
-  const c = document.getElementById('sparks'), x = c.getContext('2d');
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  let w, h, p = [];
-  const size = () => { w = c.width = c.offsetWidth; h = c.height = c.offsetHeight; };
-  addEventListener('resize', size); size();
-  const spawn = () => ({ x: w / 2 + (Math.random() - .5) * w * .18, y: h * .52, vx: (Math.random() - .5) * 1.6,
-    vy: -1 - Math.random() * 2.4, life: 1, hue: Math.random() < .25 ? 205 : 32 });
-  (function tick() {
-    if (!document.hidden) {
-      x.clearRect(0, 0, w, h);
-      if (p.length < 90) p.push(spawn());
-      p = p.filter(s => (s.life -= .008) > 0);
-      for (const s of p) {
-        s.x += s.vx; s.y += s.vy; s.vy += .012;
-        x.fillStyle = `hsla(${s.hue},95%,${s.hue === 205 ? 70 : 60}%,${s.life})`;
-        x.fillRect(s.x, s.y, 2, 2);
-      }
-    }
-    requestAnimationFrame(tick);
-  })();
-})();
+gsap.registerPlugin(ScrollTrigger);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Smooth scroll, driven by GSAP's ticker so ScrollTrigger stays in sync.
+if (!reduce && window.Lenis) {
+  const lenis = new Lenis({ lerp: .09 });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); lenis.scrollTo(a.getAttribute('href')); }));
+}
+
+gsap.to('.progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
+
+// Film chapters: the section pins and the scroll position becomes the video's time.
+// Loaded as a blob so every frame is seekable on any host.
+function filmChapter(sec) {
+  const v = sec.querySelector('video'), lines = gsap.utils.toArray(sec.querySelectorAll('.lines p'));
+  fetch(sec.dataset.film).then(r => r.blob()).then(b => { v.src = URL.createObjectURL(b); });
+  let target = 0;
+  const tl = gsap.timeline({ scrollTrigger: { trigger: sec, start: 'top top', end: () => '+=' + innerHeight * sec.dataset.scroll / 100, pin: true, scrub: true,
+    onUpdate: s => { target = s.progress; } } });
+  const slot = .84 / lines.length;
+  lines.forEach((p, i) => {
+    const at = .08 + i * slot;
+    tl.fromTo(p, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .06 }, at)
+      .to(p, { opacity: 0, y: -16, duration: .06 }, at + slot - .07);
+  });
+  const hint = sec.querySelector('.hint');
+  if (hint) tl.to(hint, { opacity: 0, duration: .05 }, 0);
+  tl.to({}, { duration: 1 }, 0); // timeline length 1, so the positions above are fractions of the scroll
+  // ease the video toward the scroll target every frame
+  gsap.ticker.add(() => {
+    if (!v.duration) return;
+    const want = Math.min(target, .999) * v.duration;
+    if (Math.abs(v.currentTime - want) > .01) v.currentTime += (want - v.currentTime) * .25;
+  });
+}
+
+filmChapter(document.getElementById('top'));
+
+// The oath: each word lights from ash to gold as you scroll through it.
+document.querySelectorAll('.oath li').forEach(li => { li.innerHTML = li.textContent.split(' ').map(w => `<span class="w">${w}</span>`).join(' '); });
+if (!reduce) {
+  gsap.timeline({ scrollTrigger: { trigger: '.oath', start: 'top top', end: () => '+=' + innerHeight * 1.6, pin: true, scrub: true } })
+    .to('.oath .w', { color: '#fff0c2', textShadow: '0 0 30px #e8b75a66', stagger: .1, ease: 'none' })
+    .to('.oath .sign', { opacity: 1 });
+}
+
+filmChapter(document.getElementById('bellatrix'));
+
+// Gallery: vertical scroll slides the screenshots sideways.
+const track = document.querySelector('.track');
+gsap.to(track, { x: () => -(track.scrollWidth - innerWidth), ease: 'none',
+  scrollTrigger: { trigger: '.rail', start: 'top top', end: () => '+=' + track.scrollWidth, pin: true, scrub: 1, invalidateOnRefresh: true } });
+
+// The hut opens through a circle that grows from the cauldron.
+gsap.timeline({ scrollTrigger: { trigger: '.hut', start: 'top top', end: () => '+=' + innerHeight * 1.8, pin: true, scrub: 1 } })
+  .to('.hut .art', { clipPath: 'circle(80% at 56% 58%)', scale: 1, ease: 'power2.inOut' })
+  .from('.hut .copy > *', { opacity: 0, y: 40, stagger: .15 }, '-=.3');
+
+if (!reduce) gsap.utils.toArray('.reveal').forEach(el => gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } }));
 </script>
 </body>
 </html>
