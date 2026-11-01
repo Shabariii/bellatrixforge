@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>BELLATRIX | Bellatrix Forge Studios</title>
+<meta name="description" content="BELLATRIX, a space-opera bullet heaven. The blue giant of Orion is changing, the fleet has turned, and one pilot launches with ECHO. Free demo.">
+<meta property="og:title" content="BELLATRIX">
+<meta property="og:image" content="../film/title_reveal_end.jpg">
+<link rel="icon" href="../img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800;900&family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root { --night:#050609; --gold:#e8b75a; --gold-hi:#fff0c2; --gold-dk:#7d5a20; --blue:#6cc0ff; --ember:#ff7b2c; --bone:#ece3cf; --dim:#8e8676; }
+* { box-sizing:border-box; }
+html, body { margin:0; background:var(--night); color:var(--bone); }
+body { font:17px/1.65 Inter, sans-serif; overflow-x:hidden; }
+::selection { background:var(--gold); color:#000; }
+a { color:inherit; }
+img { display:block; max-width:100%; }
+
+.bar { position:fixed; inset:0 0 auto; z-index:50; display:flex; justify-content:space-between; align-items:center; padding:16px clamp(16px,4vw,56px); }
+.bar a { text-decoration:none; font:600 12px Cinzel, serif; letter-spacing:.28em; text-transform:uppercase; color:var(--bone); opacity:.8; margin-left:26px; }
+.bar a:hover { opacity:1; color:var(--gold); }
+.bar .brand { margin:0; display:flex; align-items:center; gap:10px; opacity:1; color:var(--gold); }
+.bar .brand img { width:26px; }
+.progress { position:fixed; left:0; top:0; height:2px; width:100%; transform-origin:0 50%; transform:scaleX(0); background:linear-gradient(90deg,var(--gold-dk),var(--gold),var(--blue)); z-index:60; }
+
+.film { position:relative; height:100vh; overflow:hidden; background:#000; }
+.film video { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.film .veil { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 50%, transparent 40%, #000c 100%); pointer-events:none; }
+.lines { position:absolute; left:0; right:0; bottom:9vh; height:5em; pointer-events:none; }
+.lines p { position:absolute; left:50%; bottom:0; width:min(1100px,92vw); transform:translateX(-50%); margin:0; opacity:0; text-align:center;
+  font:500 clamp(22px,2.7vw,40px)/1.3 "Cormorant Garamond", serif; font-style:italic; color:var(--gold-hi); text-shadow:0 2px 24px #000; }
+.hint { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); font:600 11px Cinzel, serif; letter-spacing:.4em; color:var(--gold); animation:breathe 2.6s ease-in-out infinite; }
+@keyframes breathe { 50% { opacity:.25; } }
+
+.oath { min-height:100vh; display:grid; place-items:center; padding:12vh 16px; background:radial-gradient(ellipse at 50% 60%, #ff7b2c12, transparent 60%); }
+.oath ol { list-style:none; margin:0; padding:0; text-align:center; }
+.oath li { font:800 clamp(24px,4.2vw,72px)/1.12 Cinzel, serif; margin:.18em 0; }
+.oath .w { color:#2a2620; }
+.oath .sign { margin-top:6vh; text-align:center; font:500 clamp(18px,1.8vw,26px) "Cormorant Garamond", serif; font-style:italic; color:var(--gold); letter-spacing:.06em; opacity:0; }
+
+.chapter { padding:14vh clamp(16px,6vw,96px) 8vh; max-width:1700px; margin:auto; }
+.eyebrow { font:600 12px Cinzel, serif; letter-spacing:.45em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:18px; }
+.eyebrow::after { content:""; height:1px; flex:0 0 120px; background:linear-gradient(90deg,var(--gold),transparent); }
+.chapter h2 { font:900 clamp(44px,8vw,140px)/.95 "Cinzel Decorative", serif; margin:.25em 0 .2em; color:var(--gold-hi); letter-spacing:.02em; }
+.split { display:grid; grid-template-columns:1.1fr 1fr; gap:clamp(24px,5vw,100px); align-items:end; }
+.split .lede { font:500 clamp(22px,2.2vw,34px)/1.35 "Cormorant Garamond", serif; margin:0; }
+.split p { color:#c9c0ac; margin:0 0 1em; }
+.btns { display:flex; flex-wrap:wrap; gap:14px; margin-top:28px; }
+.btn { position:relative; isolation:isolate; overflow:hidden; text-decoration:none; font:700 13px Cinzel, serif; letter-spacing:.24em; text-transform:uppercase; padding:16px 30px; border:1px solid var(--gold); color:var(--gold-hi); }
+.btn::before { content:""; position:absolute; inset:0; background:var(--gold); transform:translateY(101%); transition:transform .45s cubic-bezier(.7,0,.2,1); z-index:-1; }
+.btn:hover { color:#120d05; } .btn:hover::before { transform:none; }
+.btn.ghost { border-color:#ffffff33; color:var(--dim); pointer-events:none; }
+.reveal { opacity:0; transform:translateY(40px); }
+.flame { background:linear-gradient(180deg,#fff6d8 0%,#ffd27a 38%,#ff9a3c 70%,#c2410c 100%); -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 0 18px #ff7b2c55); }
+#embers { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:40; mix-blend-mode:screen; }
+
+.rail { height:100vh; overflow:hidden; display:flex; align-items:center; }
+.track { display:flex; gap:3vw; padding:0 8vw; will-change:transform; }
+.track figure { margin:0; flex:0 0 min(62vw,1100px); }
+.track img { width:100%; aspect-ratio:16/9; object-fit:cover; border:1px solid #e8b75a44; box-shadow:0 30px 80px #000; }
+.track figcaption { margin-top:12px; font:600 12px Cinzel, serif; letter-spacing:.3em; text-transform:uppercase; color:var(--dim); }
+
+.hut { position:relative; height:100vh; overflow:hidden; }
+.hut .art { position:absolute; inset:0; background:url(../img/wdh_logo_art.webp) center/cover; clip-path:circle(9% at 44% 76%); transform:scale(1.3); transform-origin:44% 76%; }
+#brew { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.hut .shade { position:absolute; inset:0; background:linear-gradient(0deg,#050609 4%,transparent 45%); }
+.hut .copy { position:absolute; right:clamp(16px,5vw,80px); bottom:7vh; max-width:520px; padding:22px 26px; background:#0a0c08cc; border:1px solid #9be15d55; backdrop-filter:blur(6px); }
+.sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+.hut p { font-size:18px; color:#e7e0cc; margin:.4em 0 0; }
+
+.battles { position:relative; min-height:100vh; display:grid; grid-template-columns:1.2fr 1fr; align-items:center; gap:clamp(24px,5vw,90px); padding:12vh clamp(16px,6vw,96px); overflow:hidden;
+  background:radial-gradient(ellipse at 30% 50%,#ff7b2c1c,transparent 60%); }
+.battles .cover { position:relative; border:1px solid #e8b75a55; box-shadow:0 40px 100px #000, 0 0 80px #ff7b2c22; overflow:hidden; }
+.battles .cover img { width:100%; transform:scale(1.15); }
+.battles h2 { font:900 clamp(40px,6vw,104px)/.95 "Cinzel Decorative", serif; margin:.25em 0 .2em; }
+.battles p { color:#c9c0ac; }
+.stamp { display:inline-block; margin-top:30px; font:900 clamp(20px,2vw,30px) "Cinzel Decorative", serif; color:var(--ember); border:3px double var(--ember);
+  padding:4px 18px; transform:rotate(-5deg); text-shadow:0 0 18px #ff7b2c88; animation:hot 4s ease-in-out infinite; }
+@keyframes hot { 50% { color:#ffb36b; border-color:#ffb36b; } }
+.fire { padding:16vh 16px 18vh; text-align:center; background:radial-gradient(ellipse at 50% 100%,#ff7b2c22,transparent 65%); }
+.fire h2 { font:900 clamp(36px,5.5vw,90px)/1 "Cinzel Decorative", serif; color:var(--gold-hi); margin:0 0 .3em; }
+.fire p { max-width:760px; margin:0 auto; color:#c9c0ac; font-size:19px; }
+.fire .btns, .fire .eyebrow { justify-content:center; }
+
+footer { padding:60px 16px 70px; text-align:center; border-top:1px solid #e8b75a22; color:var(--dim); font-size:14px; }
+footer img { width:150px; margin:0 auto 18px; }
+footer nav a { margin:0 12px; font:600 12px Cinzel, serif; letter-spacing:.25em; text-transform:uppercase; text-decoration:none; color:var(--gold); }
+
+@media (max-width:820px) { .bar nav { display:none; } .split, .battles { grid-template-columns:1fr; } .hut .copy { left:16px; right:16px; } .track figure { flex-basis:84vw; } }
+@media (prefers-reduced-motion:reduce) { .reveal { opacity:1; transform:none; } .oath .w { color:var(--gold-hi); } .oath .sign { opacity:1; } }
+</style>
+<style>
+.pillars { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:clamp(20px,3vw,48px); padding:6vh clamp(16px,6vw,96px) 10vh; max-width:1700px; margin:auto; }
+.pillar { border-top:2px solid var(--gold-dk); padding-top:20px; }
+.pillar h3 { font:700 clamp(20px,1.6vw,26px) "Cinzel Decorative", serif; color:var(--gold-hi); margin:0 0 10px; }
+.pillar p { margin:0; color:#c9c0ac; }
+.bosses { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr)); gap:18px; padding:0 clamp(16px,6vw,96px) 12vh; max-width:1700px; margin:auto; }
+.bosses figure { margin:0; position:relative; overflow:hidden; border:1px solid #e8b75a44; }
+.bosses img { width:100%; aspect-ratio:16/9; object-fit:cover; transition:transform .8s; }
+.bosses figure:hover img { transform:scale(1.05); }
+.bosses figcaption { position:absolute; left:0; right:0; bottom:0; padding:40px 22px 16px; background:linear-gradient(0deg,#000d,transparent); font:900 clamp(22px,2vw,32px) "Cinzel Decorative", serif; color:var(--gold-hi); }
+.cta { text-align:center; padding:14vh 16px 16vh; background:radial-gradient(ellipse at 50% 100%,#6cc0ff1c,transparent 65%); }
+.cta h2 { font:900 clamp(36px,6vw,100px)/1 "Cinzel Decorative", serif; margin:0 0 .3em; }
+.cta .btns { justify-content:center; }
+</style>
+</head>
+<body>
+<div class="progress"></div>
+<canvas id="embers" aria-hidden="true"></canvas>
+<header class="bar">
+  <a class="brand" href="../"><img src="../img/icon.png" alt="">Bellatrix Forge</a>
+  <nav><a href="#story">The Story</a><a href="#bosses">Fortresses</a><a href="#play">Play</a><a href="../">All Games</a></nav>
+</header>
+
+<section class="film" id="top">
+  <video src="../film/title_reveal.mp4" muted playsinline autoplay preload="auto"></video>
+  <div class="veil"></div>
+  <div class="lines">
+    <p>The last fleet answers to one name.</p>
+  </div>
+  <div class="hint">SCROLL</div>
+</section>
+
+<div class="chapter" id="story">
+  <div class="eyebrow reveal">The star is changing</div>
+  <div class="split">
+    <div>
+      <h2 class="reveal flame">BELLATRIX</h2>
+      <p class="lede reveal">Bellatrix, the blue giant of Orion, is in transition. Something in the asteroid belt is corrupting the change, and it has turned our own fleet against us.</p>
+    </div>
+    <div class="reveal">
+      <p>You launch alone. ECHO, the memory of the ancients, speaks in your ear through every climb.</p>
+      <p>A space-opera bullet heaven: fly a fighter with real momentum, pick your upgrades and survive the swarm, then face the fortress that closes every level.</p>
+      <div class="btns"><a class="btn" href="https://pixelforgestudiosgames.itch.io/bellatrix" target="_blank" rel="noopener">Play the free demo</a><span class="btn ghost">Steam: coming</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="pillars">
+  <div class="pillar reveal"><h3>Survive the Swarm</h3><p>Every level-up offers a hull module, a passive or a skill. Flak that airbursts, lightning that chains, plasma that burns. Each card shows the numbers before and after.</p></div>
+  <div class="pillar reveal"><h3>Fortress Bosses</h3><p>No boss, no clear. Every level ends against a named fortress with phases and telegraphed laser sweeps that force you to move.</p></div>
+  <div class="pillar reveal"><h3>Light the Starforge</h3><p>Between runs, stardust lights the stars of a growing constellation, unlocking weapons, passives and skills for the next launch.</p></div>
+  <div class="pillar reveal"><h3>A Pilot's Ceremony</h3><p>Register your callsign, feel the dock ignite, warp into the sector and return to Mission Control between flights.</p></div>
+</div>
+
+<section class="rail" aria-label="BELLATRIX screenshots">
+  <div class="track">
+    <figure><img loading="lazy" src="../img/bx_01_swarm.webp" alt=""><figcaption>The swarm</figcaption></figure>
+    <figure><img loading="lazy" src="../img/bx_05_level_up_cards.webp" alt=""><figcaption>Choose your module</figcaption></figure>
+    <figure><img loading="lazy" src="../img/bx_08_warp_corridor.webp" alt=""><figcaption>The warp</figcaption></figure>
+    <figure><img loading="lazy" src="../img/bx_06_campaign_map.webp" alt=""><figcaption>The campaign</figcaption></figure>
+    <figure><img loading="lazy" src="../img/bx_11_starforge.webp" alt=""><figcaption>The Starforge</figcaption></figure>
+  </div>
+</section>
+
+<div class="chapter" id="bosses" style="padding-bottom:4vh">
+  <div class="eyebrow reveal">Every level ends with a fortress</div>
+</div>
+<div class="bosses">
+  <figure class="reveal"><img loading="lazy" src="../img/bx_02_boss_the_bastion.webp" alt=""><figcaption>The Bastion</figcaption></figure>
+  <figure class="reveal"><img loading="lazy" src="../img/bx_03_boss_the_armory.webp" alt=""><figcaption>The Armory</figcaption></figure>
+</div>
+
+<section class="cta" id="play">
+  <div class="eyebrow reveal" style="justify-content:center">Free demo</div>
+  <h2 class="reveal flame">Launch Now</h2>
+  <div class="btns reveal"><a class="btn" href="https://pixelforgestudiosgames.itch.io/bellatrix" target="_blank" rel="noopener">Play in your browser</a><a class="btn" href="../">Back to the forge</a></div>
+</section>
+
+<footer>
+  <img src="../img/studio_lockup.webp" alt="Bellatrix Forge Studios">
+  <p>&copy; 2026 Bellatrix Forge Studios &middot; Made in Brazil</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Smooth scroll, driven by GSAP's ticker so ScrollTrigger stays in sync.
+if (!reduce && window.Lenis) {
+  const lenis = new Lenis({ lerp: .09 });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); lenis.scrollTo(a.getAttribute('href')); }));
+}
+
+gsap.to('.progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: true } });
+
+// Film chapters play straight through, once, when they come into view; the lines follow the film's clock.
+function filmChapter(sec) {
+  const v = sec.querySelector('video'), lines = gsap.utils.toArray(sec.querySelectorAll('.lines p')), hint = sec.querySelector('.hint');
+  const tl = gsap.timeline({ paused: true });
+  lines.forEach((p, i) => {
+    tl.to(p, { opacity: 1, y: 0, duration: .8 }, i * 3.2 + 1.2);
+    if (i < lines.length - 1) tl.to(p, { opacity: 0, y: -14, duration: .6 }, i * 3.2 + 3.6);
+  });
+  if (hint) { gsap.set(hint, { opacity: 0 }); tl.to(hint, { opacity: .8, duration: .6 }, 2); }
+  let played = false;
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting && !played) { played = true; v.currentTime = 0; v.play().catch(() => {}); tl.play(); }
+  }, { threshold: .6 }).observe(sec);
+}
+
+filmChapter(document.getElementById('top'));
+
+// Gallery: vertical scroll slides the screenshots sideways.
+const track = document.querySelector('.track');
+gsap.to(track, { x: () => -(track.scrollWidth - innerWidth), ease: 'none',
+  scrollTrigger: { trigger: '.rail', start: 'top top', end: () => '+=' + track.scrollWidth, pin: true, scrub: 1, invalidateOnRefresh: true } });
+
+// Embers drift up the whole page, a few at a time.
+(() => {
+  if (reduce) return;
+  const c = document.getElementById('embers'), x = c.getContext('2d');
+  let w, h, e = [];
+  const size = () => { w = c.width = innerWidth; h = c.height = innerHeight; };
+  addEventListener('resize', size); size();
+  (function tick() {
+    requestAnimationFrame(tick);
+    if (document.hidden) return;
+    x.clearRect(0, 0, w, h);
+    if (e.length < 40 && Math.random() < .3) e.push({ x: Math.random() * w, y: h + 10, vx: (Math.random() - .5) * .4, vy: -(.4 + Math.random() * 1.1), life: 1 });
+    e = e.filter(p => (p.life -= .0035) > 0 && p.y > -10);
+    for (const p of e) {
+      p.x += p.vx + Math.sin(p.y / 60) * .25; p.y += p.vy;
+      x.fillStyle = `rgba(255,${120 + p.life * 90 | 0},40,${p.life * .8})`;
+      x.fillRect(p.x, p.y, 2, 2);
+    }
+  })();
+})();
+
+if (!reduce) gsap.utils.toArray('.reveal').forEach(el => gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } }));
+</script>
+</body>
+</html>
