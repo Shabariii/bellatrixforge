@@ -66,7 +66,7 @@ img { display:block; max-width:100%; }
 .reveal { opacity:0; transform:translateY(40px); }
 .flame { background:linear-gradient(180deg,#fff6d8 0%,#ffd27a 38%,#ff9a3c 70%,#c2410c 100%); -webkit-background-clip:text; background-clip:text; color:transparent;
   filter:drop-shadow(0 0 18px #ff7b2c55); }
-#embers { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:40; mix-blend-mode:screen; }
+#embers { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:40; }
 
 .rail { height:100vh; overflow:hidden; display:flex; align-items:center; }
 .track { display:flex; gap:3vw; padding:0 8vw; will-change:transform; }
@@ -241,8 +241,8 @@ function filmChapter(sec) {
   const end = sec.querySelector('.endlogo');
   if (end) {
     // map the measured box from the 1280x720 frame through object-fit:cover onto the screen
-    const place = () => { const W = sec.clientWidth, H = sec.clientHeight, s = Math.max(W / 1280, H / 720), ox = (W - 1280 * s) / 2, oy = (H - 720 * s) / 2, k = 342 / 1003;
-      Object.assign(end.style, { left: ox + 468 * s + 'px', top: oy + (115 - 7 * k) * s + 'px', width: 342 * s + 'px' }); };
+    const place = () => { const W = sec.clientWidth, H = sec.clientHeight, s = Math.max(W / 1280, H / 720), ox = (W - 1280 * s) / 2, oy = (H - 720 * s) / 2;
+      Object.assign(end.style, { left: ox + 466.75 * s + 'px', top: oy + 100.75 * s + 'px', width: 346.5 * s + 'px' }); };
     addEventListener('resize', place); place(); end.place = place;
   }
   ScrollTrigger.create({ trigger: sec, start: 'top top', end: () => '+=' + innerHeight, pin: true });
