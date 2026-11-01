@@ -33,6 +33,13 @@ img { display:block; max-width:100%; }
 .lines { position:absolute; left:0; right:0; bottom:9vh; height:5em; pointer-events:none; }
 .lines p { position:absolute; left:50%; bottom:0; width:min(1100px,92vw); transform:translateX(-50%); margin:0; opacity:0; text-align:center;
   font:500 clamp(22px,2.7vw,40px)/1.3 "Cormorant Garamond", serif; font-style:italic; color:var(--gold-hi); text-shadow:0 2px 24px #000; }
+.endlogo { position:absolute; left:50%; top:6vh; height:min(64vh,900px); transform:translateX(-50%); opacity:0; pointer-events:none;
+  filter:drop-shadow(0 0 22px #6cc0ff66) drop-shadow(0 0 60px #6cc0ff33); }
+.endlogo.on { opacity:1; transition:opacity 1.2s; animation:pulse 3.4s ease-in-out infinite; }
+@keyframes pulse { 50% { filter:drop-shadow(0 0 34px #6cc0ffaa) drop-shadow(0 0 110px #6cc0ff55); } }
+.film video.dim { opacity:0; transition:opacity 1.2s; }
+#top .lines { bottom:8vh; }
+#top .lines p { font-size:clamp(18px,1.9vw,30px); }
 .hint { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); font:600 11px Cinzel, serif; letter-spacing:.4em; color:var(--gold); animation:breathe 2.6s ease-in-out infinite; }
 @keyframes breathe { 50% { opacity:.25; } }
 
@@ -66,10 +73,13 @@ img { display:block; max-width:100%; }
 .track figcaption { margin-top:12px; font:600 12px Cinzel, serif; letter-spacing:.3em; text-transform:uppercase; color:var(--dim); }
 
 .hut { position:relative; height:100vh; overflow:hidden; }
-.hut .art { position:absolute; inset:0; background:url(img/wdh_logo_art.webp) center/cover; clip-path:circle(9% at 44% 76%); transform:scale(1.3); transform-origin:44% 76%; }
-#brew { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
-.hut .shade { position:absolute; inset:0; background:linear-gradient(0deg,#050609 4%,transparent 45%); }
-.hut .copy { position:absolute; right:clamp(16px,5vw,80px); bottom:7vh; max-width:520px; padding:22px 26px; background:#0a0c08cc; border:1px solid #9be15d55; backdrop-filter:blur(6px); }
+.hut { background:#070806; }
+.hut .blur { position:absolute; inset:0; background:url(img/wdh_logo_art.webp) center/cover; filter:blur(40px) brightness(.35); transform:scale(1.2); opacity:0; }
+.hut .art { position:absolute; inset:0 0 19vh; background:url(img/wdh_logo_art.webp) center/contain no-repeat; clip-path:circle(9% at 44% 76%); transform:scale(1.3); transform-origin:44% 76%; }
+#brew { position:absolute; inset:0 0 19vh; width:100%; height:calc(100% - 19vh); pointer-events:none; }
+.hut .shade { display:none; }
+.hut .copy { position:absolute; left:0; right:0; bottom:0; height:19vh; display:flex; align-items:center; justify-content:center; gap:clamp(16px,3vw,48px); padding:0 16px; text-align:left; }
+.hut .copy p { max-width:620px; }
 .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
 .hut p { font-size:18px; color:#e7e0cc; margin:.4em 0 0; }
 
@@ -106,6 +116,7 @@ footer nav a { margin:0 12px; font:600 12px Cinzel, serif; letter-spacing:.25em;
 <section class="film" id="top">
   <video src="film/studio_entry.mp4" muted playsinline autoplay preload="auto"></video>
   <div class="veil"></div>
+  <img class="endlogo" src="img/studio_lockup_hd.webp" alt="Bellatrix Forge Studios">
   <div class="lines">
     <p>From the ashes of creation, from the anvils of existence,</p>
     <p>Bellatrix Forge Studios was molded and crafted with care.</p>
@@ -130,9 +141,7 @@ footer nav a { margin:0 12px; font:600 12px Cinzel, serif; letter-spacing:.25em;
   <video src="film/title_reveal.mp4" muted playsinline preload="auto"></video>
   <div class="veil"></div>
   <div class="lines">
-    <p>Bellatrix, the blue giant of Orion, is changing.</p>
-    <p>Something in the belt is corrupting the change, and our own fleet has turned.</p>
-    <p>One pilot launches. ECHO speaks in her ear.</p>
+    <p>While she shines, we fly.</p>
   </div>
 </section>
 <div class="chapter">
@@ -164,9 +173,8 @@ footer nav a { margin:0 12px; font:600 12px Cinzel, serif; letter-spacing:.25em;
 </section>
 
 <section class="hut" id="hut">
-  <div class="art"></div><canvas id="brew" aria-hidden="true"></canvas><div class="shade"></div>
+  <div class="blur"></div><div class="art"></div><canvas id="brew" aria-hidden="true"></canvas><div class="shade"></div>
   <div class="copy">
-    <div class="eyebrow">From the swamp</div>
     <h2 class="sr">Witch Doctor's Hut</h2>
     <p>A blue troll brews gross potions on your taskbar. A skull roasts him. You type, the pot stirs, the troll regrets everything.</p>
     <div class="btns"><a class="btn" href="witch-doctors-hut/">Enter the hut</a></div>
@@ -179,7 +187,7 @@ footer nav a { margin:0 12px; font:600 12px Cinzel, serif; letter-spacing:.25em;
     <div class="eyebrow reveal">From the arenas of Vesper</div>
     <h2 class="reveal flame">Bellatrix Battles</h2>
     <p class="reveal">Build your clan, equip your fighters, and face the arenas of Vesper in a sci-fi tactical arena. The prototype is already playable in your browser.</p>
-    <div class="btns reveal"><a class="btn" href="https://pixelforgestudiosgames.itch.io/bellatrix-battles" target="_blank" rel="noopener">Try the prototype</a></div>
+    <div class="btns reveal"><a class="btn" href="battles/">Explore the arenas</a><a class="btn" href="https://pixelforgestudiosgames.itch.io/bellatrix-battles" target="_blank" rel="noopener">Try the prototype</a></div>
     <div class="stamp reveal">Release: To Be Confirmed</div>
   </div>
 </section>
@@ -227,6 +235,8 @@ function filmChapter(sec) {
     if (i < lines.length - 1) tl.to(p, { opacity: 0, y: -14, duration: .6 }, i * 3.2 + 3.6);
   });
   if (hint) { gsap.set(hint, { opacity: 0 }); tl.to(hint, { opacity: .8, duration: .6 }, 2); }
+  const end = sec.querySelector('.endlogo');
+  if (end) v.addEventListener('ended', () => { v.classList.add('dim'); end.classList.add('on'); });
   let played = false;
   new IntersectionObserver(([e]) => {
     if (e.isIntersecting && !played) { played = true; v.currentTime = 0; v.play().catch(() => {}); tl.play(); }
@@ -240,7 +250,8 @@ document.querySelectorAll('.oath li').forEach(li => { li.innerHTML = li.textCont
 if (!reduce) {
   gsap.timeline({ scrollTrigger: { trigger: '.oath', start: 'top top', end: () => '+=' + innerHeight * 1.6, pin: true, scrub: true } })
     .to('.oath .w', { color: '#fff0c2', textShadow: '0 0 30px #e8b75a66', stagger: .1, ease: 'none' })
-    .to('.oath .sign', { opacity: 1 });
+    .to('.oath .sign', { opacity: 1 })
+    .call(() => { const w = [...document.querySelectorAll('.oath .w')].pop().getBoundingClientRect(); window.burst && burst(w.left + w.width / 2, w.top + w.height / 2); });
 }
 
 filmChapter(document.getElementById('bellatrix'));
@@ -253,16 +264,17 @@ gsap.to(track, { x: () => -(track.scrollWidth - innerWidth), ease: 'none',
 // The hut opens through a circle that grows from the cauldron.
 gsap.timeline({ scrollTrigger: { trigger: '.hut', start: 'top top', end: () => '+=' + innerHeight * 1.8, pin: true, scrub: 1 } })
   .to('.hut .art', { clipPath: 'circle(85% at 44% 76%)', scale: 1, ease: 'power2.inOut' })
+  .to('.hut .blur', { opacity: 1 }, '<')
   .from('.hut .copy', { opacity: 0, y: 40 }, '-=.3');
 
 // The cauldron bubbles: green and purple bubbles rise from the brew and pop, mapped onto the cover-fitted art.
 (() => {
   const c = document.getElementById('brew'), x = c.getContext('2d'), hut = document.querySelector('.hut');
   let w, h, bub = [], live = false;
-  const size = () => { w = c.width = hut.offsetWidth; h = c.height = hut.offsetHeight; };
+  const size = () => { w = c.width = c.offsetWidth; h = c.height = c.offsetHeight; };
   addEventListener('resize', size); size();
-  // the art is 1672x941 drawn with background-size:cover, centred; the brew surface sits at 44% / 75% of it
-  const at = (fx, fy) => { const s = Math.max(w / 1672, h / 941); return [w / 2 + (fx - .5) * 1672 * s, h / 2 + (fy - .5) * 941 * s, s]; };
+  // the art is 1672x941 drawn with background-size:contain, centred; the brew surface sits at 44% / 75% of it
+  const at = (fx, fy) => { const s = Math.min(w / 1672, h / 941); return [w / 2 + (fx - .5) * 1672 * s, h / 2 + (fy - .5) * 941 * s, s]; };
   new IntersectionObserver(([e]) => { live = e.isIntersecting; }).observe(hut);
   (function tick() {
     requestAnimationFrame(tick);
@@ -290,16 +302,20 @@ gsap.timeline({ scrollTrigger: { trigger: '.hut', start: 'top top', end: () => '
   let w, h, e = [];
   const size = () => { w = c.width = innerWidth; h = c.height = innerHeight; };
   addEventListener('resize', size); size();
+  // a hit of fire: a burst of sparks and ash from one point
+  window.burst = (bx, by) => { for (let i = 0; i < 220; i++) { const a = Math.random() * 6.28, v = 1 + Math.random() * 7;
+    e.push({ x: bx, y: by, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 2.5, life: 1, big: Math.random() < .3 }); } };
   (function tick() {
     requestAnimationFrame(tick);
     if (document.hidden) return;
     x.clearRect(0, 0, w, h);
-    if (e.length < 40 && Math.random() < .3) e.push({ x: Math.random() * w, y: h + 10, vx: (Math.random() - .5) * .4, vy: -(.4 + Math.random() * 1.1), life: 1 });
-    e = e.filter(p => (p.life -= .0035) > 0 && p.y > -10);
+    if (e.length < 60 && Math.random() < .45) e.push({ x: Math.random() * w, y: h + 10, vx: (Math.random() - .5) * .4, vy: -(.4 + Math.random() * 1.1), life: 1 });
+    e = e.filter(p => (p.life -= p.big === undefined ? .0035 : .009) > 0 && p.y > -10);
     for (const p of e) {
       p.x += p.vx + Math.sin(p.y / 60) * .25; p.y += p.vy;
-      x.fillStyle = `rgba(255,${120 + p.life * 90 | 0},40,${p.life * .8})`;
-      x.fillRect(p.x, p.y, 2, 2);
+      if (p.big !== undefined) { p.vx *= .97; p.vy = p.vy * .97 - .03; }
+      x.fillStyle = p.big ? `rgba(160,150,140,${p.life * .6})` : `rgba(255,${120 + p.life * 90 | 0},40,${p.life * .9})`;
+      const s = p.big ? 3 : 2; x.fillRect(p.x, p.y, s, s);
     }
   })();
 })();

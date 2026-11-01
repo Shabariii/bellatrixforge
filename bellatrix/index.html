@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BELLATRIX | Bellatrix Forge Studios</title>
-<meta name="description" content="BELLATRIX, a space-opera bullet heaven. The blue giant of Orion is changing, the fleet has turned, and one pilot launches with ECHO. Free demo.">
+<meta name="description" content="BELLATRIX, a space-opera bullet heaven. The blue giant of Orion is changing, the fleet has turned, and one pilot launches with ECHO. Free demo in your browser.">
 <meta property="og:title" content="BELLATRIX">
 <meta property="og:image" content="../film/title_reveal_end.jpg">
 <link rel="icon" href="../img/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800;900&family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800;900&family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=IBM+Plex+Mono:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root { --night:#050609; --gold:#e8b75a; --gold-hi:#fff0c2; --gold-dk:#7d5a20; --blue:#6cc0ff; --ember:#ff7b2c; --bone:#ece3cf; --dim:#8e8676; }
 * { box-sizing:border-box; }
@@ -32,6 +32,13 @@ img { display:block; max-width:100%; }
 .lines { position:absolute; left:0; right:0; bottom:9vh; height:5em; pointer-events:none; }
 .lines p { position:absolute; left:50%; bottom:0; width:min(1100px,92vw); transform:translateX(-50%); margin:0; opacity:0; text-align:center;
   font:500 clamp(22px,2.7vw,40px)/1.3 "Cormorant Garamond", serif; font-style:italic; color:var(--gold-hi); text-shadow:0 2px 24px #000; }
+.endlogo { position:absolute; left:50%; top:6vh; height:min(64vh,900px); transform:translateX(-50%); opacity:0; pointer-events:none;
+  filter:drop-shadow(0 0 22px #6cc0ff66) drop-shadow(0 0 60px #6cc0ff33); }
+.endlogo.on { opacity:1; transition:opacity 1.2s; animation:pulse 3.4s ease-in-out infinite; }
+@keyframes pulse { 50% { filter:drop-shadow(0 0 34px #6cc0ffaa) drop-shadow(0 0 110px #6cc0ff55); } }
+.film video.dim { opacity:0; transition:opacity 1.2s; }
+#top .lines { bottom:8vh; }
+#top .lines p { font-size:clamp(18px,1.9vw,30px); }
 .hint { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); font:600 11px Cinzel, serif; letter-spacing:.4em; color:var(--gold); animation:breathe 2.6s ease-in-out infinite; }
 @keyframes breathe { 50% { opacity:.25; } }
 
@@ -65,10 +72,13 @@ img { display:block; max-width:100%; }
 .track figcaption { margin-top:12px; font:600 12px Cinzel, serif; letter-spacing:.3em; text-transform:uppercase; color:var(--dim); }
 
 .hut { position:relative; height:100vh; overflow:hidden; }
-.hut .art { position:absolute; inset:0; background:url(../img/wdh_logo_art.webp) center/cover; clip-path:circle(9% at 44% 76%); transform:scale(1.3); transform-origin:44% 76%; }
-#brew { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
-.hut .shade { position:absolute; inset:0; background:linear-gradient(0deg,#050609 4%,transparent 45%); }
-.hut .copy { position:absolute; right:clamp(16px,5vw,80px); bottom:7vh; max-width:520px; padding:22px 26px; background:#0a0c08cc; border:1px solid #9be15d55; backdrop-filter:blur(6px); }
+.hut { background:#070806; }
+.hut .blur { position:absolute; inset:0; background:url(../img/wdh_logo_art.webp) center/cover; filter:blur(40px) brightness(.35); transform:scale(1.2); opacity:0; }
+.hut .art { position:absolute; inset:0 0 19vh; background:url(../img/wdh_logo_art.webp) center/contain no-repeat; clip-path:circle(9% at 44% 76%); transform:scale(1.3); transform-origin:44% 76%; }
+#brew { position:absolute; inset:0 0 19vh; width:100%; height:calc(100% - 19vh); pointer-events:none; }
+.hut .shade { display:none; }
+.hut .copy { position:absolute; left:0; right:0; bottom:0; height:19vh; display:flex; align-items:center; justify-content:center; gap:clamp(16px,3vw,48px); padding:0 16px; text-align:left; }
+.hut .copy p { max-width:620px; }
 .sr { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
 .hut p { font-size:18px; color:#e7e0cc; margin:.4em 0 0; }
 
@@ -94,18 +104,40 @@ footer nav a { margin:0 12px; font:600 12px Cinzel, serif; letter-spacing:.25em;
 @media (prefers-reduced-motion:reduce) { .reveal { opacity:1; transform:none; } .oath .w { color:var(--gold-hi); } .oath .sign { opacity:1; } }
 </style>
 <style>
-.pillars { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)); gap:clamp(20px,3vw,48px); padding:6vh clamp(16px,6vw,96px) 10vh; max-width:1700px; margin:auto; }
-.pillar { border-top:2px solid var(--gold-dk); padding-top:20px; }
-.pillar h3 { font:700 clamp(20px,1.6vw,26px) "Cinzel Decorative", serif; color:var(--gold-hi); margin:0 0 10px; }
-.pillar p { margin:0; color:#c9c0ac; }
-.bosses { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr)); gap:18px; padding:0 clamp(16px,6vw,96px) 12vh; max-width:1700px; margin:auto; }
-.bosses figure { margin:0; position:relative; overflow:hidden; border:1px solid #e8b75a44; }
-.bosses img { width:100%; aspect-ratio:16/9; object-fit:cover; transition:transform .8s; }
-.bosses figure:hover img { transform:scale(1.05); }
-.bosses figcaption { position:absolute; left:0; right:0; bottom:0; padding:40px 22px 16px; background:linear-gradient(0deg,#000d,transparent); font:900 clamp(22px,2vw,32px) "Cinzel Decorative", serif; color:var(--gold-hi); }
-.cta { text-align:center; padding:14vh 16px 16vh; background:radial-gradient(ellipse at 50% 100%,#6cc0ff1c,transparent 65%); }
-.cta h2 { font:900 clamp(36px,6vw,100px)/1 "Cinzel Decorative", serif; margin:0 0 .3em; }
-.cta .btns { justify-content:center; }
+.page-sec { padding:12vh clamp(16px,6vw,96px); max-width:1760px; margin:auto; }
+.page-sec h2.big { font:900 clamp(36px,5.4vw,92px)/1 "Cinzel Decorative", serif; margin:.3em 0 .5em; }
+.steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:clamp(18px,2.4vw,40px); counter-reset:s; }
+.step { position:relative; padding:28px 26px 26px; border:1px solid #e8b75a33; background:linear-gradient(160deg,#12141b,#0a0b10); }
+.step::before { counter-increment:s; content:counter(s, upper-roman); position:absolute; top:-22px; left:22px; font:900 34px "Cinzel Decorative", serif; color:var(--gold); background:var(--night); padding:0 10px; }
+.step h3, .feat h3 { font:700 clamp(19px,1.5vw,25px) "Cinzel Decorative", serif; color:var(--gold-hi); margin:6px 0 10px; }
+.step p, .feat p { margin:0; color:#c9c0ac; }
+.feats { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr)); gap:clamp(18px,2.4vw,40px); }
+.feat { border-top:2px solid var(--gold-dk); padding-top:18px; }
+.clips { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,560px),1fr)); gap:18px; }
+.clips figure { margin:0; border:1px solid #e8b75a44; box-shadow:0 30px 80px #000; }
+.clips video { width:100%; display:block; aspect-ratio:16/9; object-fit:cover; }
+.clips figcaption { padding:12px 16px; font:600 12px Cinzel, serif; letter-spacing:.3em; text-transform:uppercase; color:var(--dim); }
+.road { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:0; position:relative; }
+.road::before { content:""; position:absolute; left:0; right:0; top:15px; height:2px; background:linear-gradient(90deg,var(--gold),var(--gold-dk) 40%,#333 100%); }
+.mile { position:relative; padding:44px 22px 0 0; }
+.mile::before { content:""; position:absolute; top:7px; left:0; width:16px; height:16px; transform:rotate(45deg); background:#333; border:2px solid #555; }
+.mile.done::before { background:var(--gold); border-color:var(--gold-hi); box-shadow:0 0 18px var(--gold); }
+.mile b { display:block; font:700 18px "Cinzel Decorative", serif; color:var(--gold-hi); }
+.mile span { font:600 11px Cinzel, serif; letter-spacing:.25em; text-transform:uppercase; color:var(--dim); }
+.mile.done span { color:var(--blue); }
+.mile p { color:#c9c0ac; margin:.5em 0 0; font-size:15px; }
+.two-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr)); gap:clamp(18px,2.4vw,40px); }
+.card { padding:30px; border:1px solid #e8b75a44; background:linear-gradient(160deg,#12141b,#0a0b10); }
+.card h3 { font:900 clamp(24px,2vw,34px) "Cinzel Decorative", serif; margin:0 0 6px; }
+.card ul { margin:14px 0 0; padding-left:20px; color:#c9c0ac; } .card li { margin:.3em 0; }
+.keys { display:flex; flex-wrap:wrap; gap:12px 26px; margin-top:12px; color:#c9c0ac; }
+kbd { font:600 13px "IBM Plex Mono", monospace; padding:3px 9px; border:1px solid #e8b75a66; border-bottom-width:3px; border-radius:4px; color:var(--gold-hi); margin-right:6px; }
+.hero-art { position:relative; min-height:100vh; display:grid; place-items:end center; overflow:hidden; text-align:center; padding:0 16px 10vh; }
+.hero-art .bg { position:absolute; inset:0; background:center top/cover; }
+.hero-art .bg::after { content:""; position:absolute; inset:0; background:linear-gradient(0deg,var(--night) 6%,transparent 55%); }
+.hero-art .in { position:relative; }
+.hero-art .tagline { font:500 clamp(22px,2.4vw,36px)/1.3 "Cormorant Garamond", serif; font-style:italic; color:var(--gold-hi); text-shadow:0 2px 20px #000; margin:0 0 22px; }
+.hero-art .btns { justify-content:center; }
 </style>
 </head>
 <body>
@@ -113,15 +145,13 @@ footer nav a { margin:0 12px; font:600 12px Cinzel, serif; letter-spacing:.25em;
 <canvas id="embers" aria-hidden="true"></canvas>
 <header class="bar">
   <a class="brand" href="../"><img src="../img/icon.png" alt="">Bellatrix Forge</a>
-  <nav><a href="#story">The Story</a><a href="#bosses">Fortresses</a><a href="#play">Play</a><a href="../">All Games</a></nav>
+  <nav><a href="#move">See it move</a><a href="#plays">How it plays</a><a href="#roadmap">Roadmap</a><a href="#demo">Demo</a><a href="../">All Games</a></nav>
 </header>
 
 <section class="film" id="top">
   <video src="../film/title_reveal.mp4" muted playsinline autoplay preload="auto"></video>
   <div class="veil"></div>
-  <div class="lines">
-    <p>The last fleet answers to one name.</p>
-  </div>
+  <div class="lines"><p>While she shines, we fly.</p></div>
   <div class="hint">SCROLL</div>
 </section>
 
@@ -134,45 +164,84 @@ footer nav a { margin:0 12px; font:600 12px Cinzel, serif; letter-spacing:.25em;
     </div>
     <div class="reveal">
       <p>You launch alone. ECHO, the memory of the ancients, speaks in your ear through every climb.</p>
-      <p>A space-opera bullet heaven: fly a fighter with real momentum, pick your upgrades and survive the swarm, then face the fortress that closes every level.</p>
+      <p>A space-opera bullet heaven: fly a fighter with real momentum, build your hull one module at a time, and break the fortress that closes every level.</p>
       <div class="btns"><a class="btn" href="https://pixelforgestudiosgames.itch.io/bellatrix" target="_blank" rel="noopener">Play the free demo</a><span class="btn ghost">Steam: coming</span></div>
     </div>
   </div>
 </div>
 
-<div class="pillars">
-  <div class="pillar reveal"><h3>Survive the Swarm</h3><p>Every level-up offers a hull module, a passive or a skill. Flak that airbursts, lightning that chains, plasma that burns. Each card shows the numbers before and after.</p></div>
-  <div class="pillar reveal"><h3>Fortress Bosses</h3><p>No boss, no clear. Every level ends against a named fortress with phases and telegraphed laser sweeps that force you to move.</p></div>
-  <div class="pillar reveal"><h3>Light the Starforge</h3><p>Between runs, stardust lights the stars of a growing constellation, unlocking weapons, passives and skills for the next launch.</p></div>
-  <div class="pillar reveal"><h3>A Pilot's Ceremony</h3><p>Register your callsign, feel the dock ignite, warp into the sector and return to Mission Control between flights.</p></div>
-</div>
+<section class="page-sec" id="move">
+  <div class="eyebrow reveal">Real footage from the demo</div>
+  <h2 class="big reveal flame">See it move</h2>
+  <div class="clips">
+    <figure class="reveal"><video src="../film/the_bastion_ring.mp4" muted playsinline loop autoplay preload="metadata"></video><figcaption>The Bastion turns a station of our own fleet around</figcaption></figure>
+    <figure class="reveal"><video src="../film/the_armory_lasers.mp4" muted playsinline loop autoplay preload="metadata"></video><figcaption>The Armory sweeps the arena with lasers</figcaption></figure>
+  </div>
+</section>
+
+<section class="page-sec" id="plays">
+  <div class="eyebrow reveal">Three verbs</div>
+  <h2 class="big reveal flame">How it plays</h2>
+  <div class="steps">
+    <div class="step reveal"><h3>Move</h3><p>Your fighter has real momentum. Drift, turn, and cut through the swarm with an offensive dash. Your hull weapons do the shooting; your hands do the surviving.</p></div>
+    <div class="step reveal"><h3>Choose</h3><p>Every level-up offers a hull module, a passive or a skill. Each card shows the numbers before and after, so you always know what your build is doing.</p></div>
+    <div class="step reveal"><h3>Break the Fortress</h3><p>No boss, no clear. Every level ends against a named fortress with phases and telegraphed laser sweeps. Move, survive, then hit the exposed core.</p></div>
+  </div>
+</section>
 
 <section class="rail" aria-label="BELLATRIX screenshots">
   <div class="track">
     <figure><img loading="lazy" src="../img/bx_01_swarm.webp" alt=""><figcaption>The swarm</figcaption></figure>
     <figure><img loading="lazy" src="../img/bx_05_level_up_cards.webp" alt=""><figcaption>Choose your module</figcaption></figure>
+    <figure><img loading="lazy" src="../img/bx_02_boss_the_bastion.webp" alt=""><figcaption>The Bastion</figcaption></figure>
     <figure><img loading="lazy" src="../img/bx_08_warp_corridor.webp" alt=""><figcaption>The warp</figcaption></figure>
+    <figure><img loading="lazy" src="../img/bx_03_boss_the_armory.webp" alt=""><figcaption>The Armory</figcaption></figure>
     <figure><img loading="lazy" src="../img/bx_06_campaign_map.webp" alt=""><figcaption>The campaign</figcaption></figure>
     <figure><img loading="lazy" src="../img/bx_11_starforge.webp" alt=""><figcaption>The Starforge</figcaption></figure>
   </div>
 </section>
 
-<div class="chapter" id="bosses" style="padding-bottom:4vh">
-  <div class="eyebrow reveal">Every level ends with a fortress</div>
-</div>
-<div class="bosses">
-  <figure class="reveal"><img loading="lazy" src="../img/bx_02_boss_the_bastion.webp" alt=""><figcaption>The Bastion</figcaption></figure>
-  <figure class="reveal"><img loading="lazy" src="../img/bx_03_boss_the_armory.webp" alt=""><figcaption>The Armory</figcaption></figure>
-</div>
+<section class="page-sec" id="hangar">
+  <div class="eyebrow reveal">What waits in the hangar</div>
+  <h2 class="big reveal flame">The Wake</h2>
+  <div class="feats">
+    <div class="feat reveal"><h3>Splash and Chain</h3><p>Flak that airbursts, lightning that jumps from hull to hull, plasma that burns. Weapons are modules mounted on your ship, and they evolve as you level.</p></div>
+    <div class="feat reveal"><h3>Named Fortresses</h3><p>THE BASTION, THE ARMORY, AEGIS REVENANT. Our own stations and our own flagship, still wearing our crest.</p></div>
+    <div class="feat reveal"><h3>The Starforge</h3><p>Between runs, stardust lights the stars of a growing constellation, unlocking weapons, passives and skills for the next launch.</p></div>
+    <div class="feat reveal"><h3>ECHO</h3><p>Your guardian intelligence and the memory of the ancients. She talks you through the campaign, one line at a time, and never cuts herself off.</p></div>
+    <div class="feat reveal"><h3>Mission Control</h3><p>Station, campaign map, hangar, Starforge and records. Register your callsign, feel the dock ignite, and warp into the sector.</p></div>
+    <div class="feat reveal"><h3>Your Way to Play</h3><p>Keyboard or gamepad. EASY and NORMAL in the demo. Built to run in a browser on an ordinary laptop.</p></div>
+  </div>
+</section>
 
-<section class="cta" id="play">
-  <div class="eyebrow reveal" style="justify-content:center">Free demo</div>
-  <h2 class="reveal flame">Launch Now</h2>
-  <div class="btns reveal"><a class="btn" href="https://pixelforgestudiosgames.itch.io/bellatrix" target="_blank" rel="noopener">Play in your browser</a><a class="btn" href="../">Back to the forge</a></div>
+<section class="page-sec" id="roadmap">
+  <div class="eyebrow reveal">Where the flight goes</div>
+  <h2 class="big reveal flame">Roadmap</h2>
+  <div class="road">
+    <div class="mile done reveal"><span>Now</span><b>Free demo</b><p>Playable in your browser on itch.io: the first zone and its three fortresses.</p></div>
+    <div class="mile reveal"><span>Next</span><b>Steam page</b><p>Wishlists open as soon as the page is approved.</p></div>
+    <div class="mile reveal"><span>To be confirmed</span><b>Steam Next Fest</b><p>The demo on Steam during a festival.</p></div>
+    <div class="mile reveal"><span>To be confirmed</span><b>Full release</b><p>Three corrupted zones, Endless mode and HARD difficulty.</p></div>
+  </div>
+</section>
+
+<section class="page-sec" id="demo">
+  <div class="eyebrow reveal">Demo and full game</div>
+  <h2 class="big reveal flame">Launch Now</h2>
+  <div class="two-cards">
+    <div class="card reveal"><h3 class="flame">Free Demo</h3><p>In your browser, no install.</p>
+      <ul><li>The first zone of the Wake</li><li>Three fortress bosses: THE BASTION, THE ARMORY, AEGIS REVENANT</li><li>EASY and NORMAL</li><li>Keyboard or gamepad</li></ul>
+      <div class="btns"><a class="btn" href="https://pixelforgestudiosgames.itch.io/bellatrix" target="_blank" rel="noopener">Play in your browser</a></div></div>
+    <div class="card reveal"><h3 class="flame">Full Game</h3><p>Coming to Steam for Windows. Release date to be confirmed.</p>
+      <ul><li>The zones beyond the Wake</li><li>Endless mode</li><li>HARD difficulty</li><li>The rest of ECHO's story</li></ul>
+      <div class="btns"><span class="btn ghost">Wishlist: soon</span></div></div>
+  </div>
+  <div class="keys reveal"><span><kbd>WASD</kbd>Fly</span><span><kbd>Shift</kbd>Dash</span><span><kbd>Esc</kbd>Pause</span><span>Gamepad supported</span></div>
 </section>
 
 <footer>
   <img src="../img/studio_lockup.webp" alt="Bellatrix Forge Studios">
+  <nav><a href="../">The Forge</a><a href="https://pixelforgestudiosgames.itch.io" target="_blank" rel="noopener">itch.io</a><a href="https://www.youtube.com/@PixelForgeStudios-z7y" target="_blank" rel="noopener">YouTube</a></nav>
   <p>&copy; 2026 Bellatrix Forge Studios &middot; Made in Brazil</p>
 </footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -202,17 +271,19 @@ function filmChapter(sec) {
     if (i < lines.length - 1) tl.to(p, { opacity: 0, y: -14, duration: .6 }, i * 3.2 + 3.6);
   });
   if (hint) { gsap.set(hint, { opacity: 0 }); tl.to(hint, { opacity: .8, duration: .6 }, 2); }
+  const end = sec.querySelector('.endlogo');
+  if (end) v.addEventListener('ended', () => { v.classList.add('dim'); end.classList.add('on'); });
   let played = false;
   new IntersectionObserver(([e]) => {
     if (e.isIntersecting && !played) { played = true; v.currentTime = 0; v.play().catch(() => {}); tl.play(); }
   }, { threshold: .6 }).observe(sec);
 }
 
-filmChapter(document.getElementById('top'));
+
 
 // Gallery: vertical scroll slides the screenshots sideways.
 const track = document.querySelector('.track');
-gsap.to(track, { x: () => -(track.scrollWidth - innerWidth), ease: 'none',
+if (track) gsap.to(track, { x: () => -(track.scrollWidth - innerWidth), ease: 'none',
   scrollTrigger: { trigger: '.rail', start: 'top top', end: () => '+=' + track.scrollWidth, pin: true, scrub: 1, invalidateOnRefresh: true } });
 
 // Embers drift up the whole page, a few at a time.
@@ -222,21 +293,26 @@ gsap.to(track, { x: () => -(track.scrollWidth - innerWidth), ease: 'none',
   let w, h, e = [];
   const size = () => { w = c.width = innerWidth; h = c.height = innerHeight; };
   addEventListener('resize', size); size();
+  // a hit of fire: a burst of sparks and ash from one point
+  window.burst = (bx, by) => { for (let i = 0; i < 220; i++) { const a = Math.random() * 6.28, v = 1 + Math.random() * 7;
+    e.push({ x: bx, y: by, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 2.5, life: 1, big: Math.random() < .3 }); } };
   (function tick() {
     requestAnimationFrame(tick);
     if (document.hidden) return;
     x.clearRect(0, 0, w, h);
-    if (e.length < 40 && Math.random() < .3) e.push({ x: Math.random() * w, y: h + 10, vx: (Math.random() - .5) * .4, vy: -(.4 + Math.random() * 1.1), life: 1 });
-    e = e.filter(p => (p.life -= .0035) > 0 && p.y > -10);
+    if (e.length < 60 && Math.random() < .45) e.push({ x: Math.random() * w, y: h + 10, vx: (Math.random() - .5) * .4, vy: -(.4 + Math.random() * 1.1), life: 1 });
+    e = e.filter(p => (p.life -= p.big === undefined ? .0035 : .009) > 0 && p.y > -10);
     for (const p of e) {
       p.x += p.vx + Math.sin(p.y / 60) * .25; p.y += p.vy;
-      x.fillStyle = `rgba(255,${120 + p.life * 90 | 0},40,${p.life * .8})`;
-      x.fillRect(p.x, p.y, 2, 2);
+      if (p.big !== undefined) { p.vx *= .97; p.vy = p.vy * .97 - .03; }
+      x.fillStyle = p.big ? `rgba(160,150,140,${p.life * .6})` : `rgba(255,${120 + p.life * 90 | 0},40,${p.life * .9})`;
+      const s = p.big ? 3 : 2; x.fillRect(p.x, p.y, s, s);
     }
   })();
 })();
 
 if (!reduce) gsap.utils.toArray('.reveal').forEach(el => gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } }));
+document.querySelectorAll('.film').forEach(filmChapter);
 </script>
 </body>
 </html>
