@@ -1,0 +1,77 @@
+:root {
+  --night: #07080c; --iron: #12141b; --iron2: #1b1e27;
+  --gold: #e7b85a; --gold-hi: #fff1c4; --gold-dk: #8a6424;
+  --blue: #5fb4ff; --ember: #ff7a2a; --bone: #ece3cf; --dim: #9a917f;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--night); color: var(--bone); font: 17px/1.65 Inter, sans-serif; overflow-x: hidden; }
+::selection { background: var(--gold); color: #000; }
+::-webkit-scrollbar { width: 10px; } ::-webkit-scrollbar-thumb { background: var(--gold-dk); }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+
+nav.top { position: fixed; inset: 0 0 auto; z-index: 10; display: flex; justify-content: space-between; align-items: center;
+  padding: 14px clamp(16px, 4vw, 56px); background: linear-gradient(#07080cee, #07080c00); }
+nav.top a { text-decoration: none; font: 700 13px Cinzel, serif; letter-spacing: .22em; text-transform: uppercase; margin-left: 28px; color: var(--bone); }
+nav.top a:hover { color: var(--gold); }
+nav.top .mark { margin: 0; display: flex; align-items: center; gap: 10px; color: var(--gold); }
+nav svg, footer svg { width: 18px; fill: var(--gold); }
+
+.hero { position: relative; min-height: 100svh; display: grid; place-items: center; align-content: center; text-align: center; overflow: hidden; padding: 90px 16px 40px; }
+.hero .sky { position: absolute; inset: 0; background: center/cover; opacity: .55; transform: scale(1.06); animation: drift 40s ease-in-out infinite alternate; }
+.hero::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, transparent 0 30%, var(--night) 78%); }
+#sparks { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+.hero .logo { position: relative; z-index: 3; width: min(520px, 78vw); height: auto; filter: drop-shadow(0 0 40px #5fb4ff33); animation: strike 1.4s cubic-bezier(.2, .9, .3, 1.2) both; }
+.hero .tag { position: relative; z-index: 3; font: 500 clamp(16px, 2vw, 22px) Cinzel, serif; letter-spacing: .3em; text-transform: uppercase; color: var(--gold-hi); margin: 18px 0 0; animation: fade 1s .9s both; }
+.hero .down { position: relative; z-index: 3; margin-top: 34px; text-decoration: none; color: var(--gold); font-size: 26px; animation: bob 2.4s ease-in-out infinite; }
+@keyframes drift { to { transform: scale(1.14) translateY(-2%); } }
+@keyframes strike { from { opacity: 0; transform: translateY(-40px) scale(.94); } }
+@keyframes fade { from { opacity: 0; } }
+@keyframes bob { 50% { transform: translateY(8px); } }
+
+section { padding: clamp(60px, 9vw, 120px) clamp(16px, 5vw, 72px); max-width: 1800px; margin: auto; }
+.rule { display: flex; align-items: center; gap: 22px; margin-bottom: 48px; }
+.rule::before, .rule::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dk), var(--gold), var(--gold-dk), transparent); }
+.rule span { font: 900 clamp(22px, 3vw, 40px) "Cinzel Decorative", serif; color: var(--gold); letter-spacing: .06em; white-space: nowrap; position: relative; padding: 0 30px; }
+.rule span::before, .rule span::after { content: ""; position: absolute; top: 50%; width: 10px; height: 10px; background: var(--gold); transform: translateY(-50%) rotate(45deg); }
+.rule span::before { left: 0; } .rule span::after { right: 0; }
+
+.plaques { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: clamp(18px, 2.4vw, 36px); }
+.plaque { position: relative; display: flex; flex-direction: column; text-decoration: none; background: linear-gradient(160deg, var(--iron2), var(--iron)); border: 1px solid var(--gold-dk);
+  box-shadow: inset 0 0 0 6px var(--iron), inset 0 0 0 7px #e7b85a55, 0 20px 50px #000a; min-height: 560px; overflow: hidden; transition: transform .4s, box-shadow .4s; }
+.plaque .art { height: 300px; background: center/cover; filter: saturate(.9) brightness(.85); transition: filter .5s, transform .8s; clip-path: polygon(0 0, 100% 0, 100% 86%, 50% 100%, 0 86%); }
+.plaque:hover { transform: translateY(-6px); box-shadow: inset 0 0 0 6px var(--iron), inset 0 0 0 7px var(--gold), 0 30px 70px #000c, 0 0 60px #e7b85a22; }
+.plaque:hover .art { filter: saturate(1.1) brightness(1); transform: scale(1.03); }
+.rivets::before, .rivets::after { content: ""; position: absolute; top: 14px; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--gold-hi), var(--gold-dk)); z-index: 2; }
+.rivets::before { left: 14px; } .rivets::after { right: 14px; }
+.plaque .body { padding: 22px 30px 30px; display: flex; flex-direction: column; flex: 1; }
+.plaque h2 { font: 900 clamp(26px, 2.4vw, 36px)/1.1 Cinzel, serif; letter-spacing: .04em; margin: 8px 0 10px; color: var(--gold-hi); }
+.plaque p { color: #cfc6b3; margin: 0 0 18px; }
+.status { font: 700 11px Cinzel, serif; letter-spacing: .24em; text-transform: uppercase; color: var(--dim); }
+.status.live { color: var(--blue); }
+.go { margin-top: auto; font: 700 14px Cinzel, serif; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+.plaque:hover .go { color: var(--gold-hi); }
+
+.ingot { background: linear-gradient(160deg, #1a120c, #0d0907); border-color: #7a3a14; }
+.ingot .glow { height: 300px; background: radial-gradient(ellipse at 50% 60%, #ffb06a 0, #ff7a2a 18%, #8a2a08 42%, transparent 70%); animation: cool 5s ease-in-out infinite; clip-path: polygon(0 0, 100% 0, 100% 86%, 50% 100%, 0 86%); }
+.ingot h2 { color: #ffcf9a; }
+.ingot .stamp { margin-top: auto; align-self: flex-start; font: 900 28px "Cinzel Decorative", serif; color: var(--ember); border: 3px double var(--ember); padding: 2px 16px; transform: rotate(-6deg); opacity: .85; }
+@keyframes cool { 50% { filter: brightness(.6) saturate(.8); } }
+
+.lede { font: 500 clamp(22px, 2.4vw, 32px)/1.35 Cinzel, serif; color: var(--gold-hi); margin: 0; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 90px); align-items: start; }
+.two p { margin-top: 0; color: #cfc6b3; }
+.center { text-align: center; max-width: 900px; margin-left: auto; margin-right: auto; }
+.small { color: var(--dim); }
+.support { background: radial-gradient(ellipse at 50% 100%, #ff7a2a14, transparent 60%); }
+
+footer { text-align: center; padding: 50px 16px 60px; border-top: 1px solid #e7b85a33; color: var(--dim); font-size: 14px; }
+footer svg { width: 22px; }
+
+@media (max-width: 800px) {
+  nav.top div { display: none; }
+  .two { grid-template-columns: 1fr; }
+  .plaque { min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

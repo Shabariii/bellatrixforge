@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Witch Doctor's Hut: Deck | Bellatrix Forge Studios</title>
+<meta name="description" content="Presentation deck for Witch Doctor's Hut, a taskbar potion game by Bellatrix Forge Studios.">
+<style>
+@font-face{font-family:'Pixelify Sans';font-weight:400 700;font-display:swap;src:url(fonts/PixelifySans.ttf) format('truetype')}
+@font-face{font-family:'Silkscreen';font-weight:400;font-display:swap;src:url(fonts/Silkscreen-Regular.ttf) format('truetype')}
+:root{--u:1px;--bark:#0b100d;--moss:#1a2a1d;--moss2:#243a27;--swamp:#4f7a35;--slime:#9bd13c;--bone:#eadfbd;--parch:#d9c897;--parch2:#bfae7c;--ink:#1c140a;--lantern:#f2a23a;--ember:#d9632a;--blue:#6a8bdc;
+ --disp:'Pixelify Sans','Courier New',monospace;--lab:'Silkscreen','Courier New',monospace;--body:Georgia,'Palatino Linotype',Palatino,serif}
+*{box-sizing:border-box;font-variant-ligatures:none}
+html,body{margin:0;height:100%;background:#050806;color:var(--bone);font:400 calc(var(--u)*30)/1.45 var(--body)}
+::selection{background:var(--lantern);color:var(--ink)}
+img{display:block;max-width:100%;height:auto}
+.stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;overflow:hidden;background:var(--bark)}
+.slide{position:absolute;inset:0;padding:calc(var(--u)*72) calc(var(--u)*96) calc(var(--u)*88);opacity:0;visibility:hidden;transition:opacity .35s;display:flex;flex-direction:column;
+ background:radial-gradient(1400px 800px at 90% -10%,rgba(242,162,58,.10),transparent 60%),radial-gradient(1000px 800px at -10% 80%,rgba(79,122,53,.16),transparent 60%),var(--bark)}
+.slide.on{opacity:1;visibility:visible}
+.lab{font:400 calc(var(--u)*20)/1 var(--lab);letter-spacing:.14em;text-transform:uppercase;color:var(--parch2)}
+h1,h2,h3{font-family:var(--disp);font-weight:600;margin:0;line-height:1.02}
+h2{font-size:calc(var(--u)*84);color:var(--bone);text-shadow:0 4px 0 #000}
+h2 em{font-style:normal;color:var(--lantern)}
+h3{font-size:calc(var(--u)*50);color:var(--lantern)}
+p{margin:0}
+.hd{display:flex;align-items:flex-end;gap:calc(var(--u)*28);margin-bottom:calc(var(--u)*34);padding-bottom:calc(var(--u)*18);border-bottom:calc(var(--u)*3) dashed #2b3d2c}
+.hd .no{font:600 calc(var(--u)*30)/1 var(--disp);background:var(--lantern);color:var(--ink);padding:calc(var(--u)*10) calc(var(--u)*16) calc(var(--u)*6);transform:rotate(-3deg);box-shadow:0 5px 0 #000;margin-bottom:calc(var(--u)*6)}
+.hd .lab{margin-left:auto;text-align:right;max-width:34%}
+.cols{display:grid;gap:calc(var(--u)*36);flex:1;min-height:0}
+.c2{grid-template-columns:repeat(2,minmax(0,1fr))}.c3{grid-template-columns:repeat(3,minmax(0,1fr))}.c4{grid-template-columns:repeat(4,minmax(0,1fr))}.c12{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}.c21{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+.box{background:linear-gradient(#142016,#0d150f);border:calc(var(--u)*4) solid #223524;padding:calc(var(--u)*26);box-shadow:0 calc(var(--u)*8) 0 #000;position:relative;min-height:0}
+.box.sm p,.box.sm li{font-size:calc(var(--u)*27)!important}
+.box.gold{border-color:#7a5a1e;background:linear-gradient(#251a0a,#150f06)}
+.box.slimeb{border-color:#4f7a35}
+.box p,.box li{color:#d3cba9;font-size:calc(var(--u)*34)}
+.box ul{list-style:none;margin:0;padding:0}
+.box li{padding:calc(var(--u)*8) 0 calc(var(--u)*8) calc(var(--u)*34);border-top:calc(var(--u)*2) dashed #2b3d2c;position:relative}
+.box li:before{content:"";position:absolute;left:calc(var(--u)*6);top:calc(var(--u)*20);width:calc(var(--u)*12);height:calc(var(--u)*12);background:var(--slime);transform:rotate(45deg)}
+.box.gold li:before{background:var(--lantern)}
+.box li.no{color:#8d8566}.box li.no:before{background:none;border:calc(var(--u)*3) solid #5d5640}
+.big{font:600 calc(var(--u)*120)/1 var(--disp);color:var(--bone)}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:calc(var(--u)*22);margin-bottom:calc(var(--u)*30)}
+.kpi{border-top:calc(var(--u)*6) solid var(--swamp);padding-top:calc(var(--u)*12)}
+.kpi b{display:block;font:600 calc(var(--u)*78)/1 var(--disp);color:var(--bone)}
+.kpi span{display:block;font-size:calc(var(--u)*26);color:var(--parch2);margin-top:calc(var(--u)*6);line-height:1.3}
+.kpi.o{border-color:var(--lantern)}.kpi.g{border-color:var(--slime)}.kpi.e{border-color:var(--ember)}.kpi.b{border-color:var(--blue)}
+.tagrow{display:flex;gap:calc(var(--u)*16);flex-wrap:wrap}
+.tag{font:400 calc(var(--u)*24)/1 var(--lab);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--parch);padding:calc(var(--u)*14) calc(var(--u)*18) calc(var(--u)*12) calc(var(--u)*34);clip-path:polygon(18px 0,100% 0,100% 100%,18px 100%,0 50%);position:relative}
+.tag:before{content:"";position:absolute;left:calc(var(--u)*14);top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:var(--bark)}
+.shot{border:calc(var(--u)*6) solid #1a120a;outline:calc(var(--u)*2) solid #3a2a16;box-shadow:0 calc(var(--u)*14) calc(var(--u)*30) #000a;background:#000}
+.shot img{width:100%;height:100%;object-fit:cover}
+.cap{font:400 calc(var(--u)*19)/1.3 var(--lab);letter-spacing:.08em;text-transform:uppercase;color:var(--parch2);margin-top:calc(var(--u)*10)}
+.bubble{position:relative;background:var(--bone);color:var(--ink);padding:calc(var(--u)*16) calc(var(--u)*22);border:calc(var(--u)*4) solid #1a120a;font:600 calc(var(--u)*30)/1.3 var(--disp);box-shadow:calc(var(--u)*6) calc(var(--u)*6) 0 #000}
+.todo{display:inline-block;font:400 calc(var(--u)*17)/1 var(--lab);letter-spacing:.1em;color:var(--lantern);border:2px dashed var(--lantern);padding:calc(var(--u)*7) calc(var(--u)*10)}
+.foot{position:absolute;left:calc(var(--u)*96);right:calc(var(--u)*96);bottom:calc(var(--u)*30);display:flex;justify-content:space-between;font:400 calc(var(--u)*17)/1 var(--lab);letter-spacing:.14em;text-transform:uppercase;color:#6f7a64}
+.src{font-size:calc(var(--u)*24)!important;color:var(--parch2)!important}
+
+/* slide 1 */
+.s1{padding:0}
+.s1 .bg{position:absolute;inset:0}.s1 .bg img{width:100%;height:100%;object-fit:cover}
+.s1 .bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0b100df5 0,#0b100dcc 34%,#0b100d00 62%),linear-gradient(0deg,#0b100d 0,transparent 30%)}
+.s1 .t{position:relative;margin:auto 0 calc(var(--u)*120) calc(var(--u)*96);max-width:calc(var(--u)*880)}
+.s1 h1{font-size:calc(var(--u)*128);text-shadow:0 6px 0 #000;color:var(--bone)}
+.s1 h1 em{font-style:normal;color:var(--lantern)}
+.s1 p{margin-top:calc(var(--u)*26);font-size:calc(var(--u)*34);color:#e1d8b8}
+.s1 .lab{margin-bottom:calc(var(--u)*22);display:block}
+/* slide 2 */
+.s2{align-items:center;justify-content:center;text-align:center}
+.s2 img.logo{width:calc(var(--u)*1100);filter:drop-shadow(0 6px 0 #000) drop-shadow(0 0 30px #9bd13c55)}
+.s2 .line{font:600 calc(var(--u)*68)/1.12 var(--disp);max-width:calc(var(--u)*1400);margin:calc(var(--u)*40) auto calc(var(--u)*40);color:var(--bone)}
+.s2 .line em{font-style:normal;color:var(--lantern)}
+.s2 .tagrow{justify-content:center}
+/* slide 4 */
+.troll{position:relative;overflow:hidden;border:calc(var(--u)*6) solid #1a120a;outline:calc(var(--u)*2) solid #3a2a16;background:#000}
+.troll img{position:absolute;left:0;top:0;height:100%;width:auto;max-width:none}
+.skulls{display:flex;gap:calc(var(--u)*10);align-items:flex-end}
+.skulls img{width:calc(var(--u)*105);filter:drop-shadow(0 6px 0 #000)}
+.lines{display:flex;flex-direction:column;gap:calc(var(--u)*14);margin-top:calc(var(--u)*18)}
+.lines .bubble{font-size:calc(var(--u)*25);padding:calc(var(--u)*10) calc(var(--u)*18)}
+/* slide 5 */
+.cast{height:calc(var(--u)*270);overflow:hidden;position:relative}
+.cast img{height:100%;width:auto;max-width:none;filter:drop-shadow(0 6px 0 #000)}
+.shelfs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:calc(var(--u)*28);align-items:end}
+.shelfs .sh{border-bottom:calc(var(--u)*12) solid #4a2f14;box-shadow:0 8px 0 #000}
+.shelfs img.long{width:100%}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:calc(var(--u)*20);margin-top:calc(var(--u)*30)}
+/* slide 6 */
+.chart{width:100%;height:100%}
+.chart text{font-family:var(--lab);fill:#bfae7c;font-size:16px;letter-spacing:.08em}
+.legend{display:grid;grid-template-columns:1fr;gap:calc(var(--u)*16);margin-top:calc(var(--u)*10)}
+.legend div{display:flex;gap:calc(var(--u)*14);align-items:center;font-size:calc(var(--u)*29);color:#d3cba9}
+.legend i{width:calc(var(--u)*46);height:calc(var(--u)*8);display:block}
+/* slide 8 */
+.tier h3{font-size:calc(var(--u)*60)}
+.tier .price{font:600 calc(var(--u)*40)/1 var(--disp);color:var(--bone);margin:calc(var(--u)*8) 0 calc(var(--u)*14)}
+.tier li{font-size:calc(var(--u)*29)!important;padding-top:calc(var(--u)*6)!important;padding-bottom:calc(var(--u)*6)!important}
+.reco{margin-top:calc(var(--u)*26);border:calc(var(--u)*4) solid var(--lantern);padding:calc(var(--u)*18) calc(var(--u)*26);background:#1b1305;display:flex;gap:calc(var(--u)*26);align-items:center}
+.reco b{font:600 calc(var(--u)*46)/1.1 var(--disp);color:var(--lantern)}
+.reco span{font-size:calc(var(--u)*29);color:#e1d8b8}
+/* slide 9 bars */
+.bars{display:flex;flex-direction:column;gap:calc(var(--u)*30)}
+.bar{display:grid;grid-template-columns:calc(var(--u)*440) 1fr calc(var(--u)*170);align-items:center;gap:calc(var(--u)*18);font-size:calc(var(--u)*29)}
+.bar .t{height:calc(var(--u)*44);background:#111a14;border:2px solid #223524}
+.bar .t i{display:block;height:100%;background:var(--swamp)}
+.bar b{font:600 calc(var(--u)*38) var(--disp);color:var(--bone)}
+.bar.us .t i{background:var(--lantern)}
+/* slide 10 */
+.tl{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:calc(var(--u)*22);margin:auto 0;flex:none;padding-bottom:calc(var(--u)*60)}
+.tl:before{content:"";position:absolute;left:0;right:0;top:calc(var(--u)*13);height:calc(var(--u)*6);background:linear-gradient(#5b3d1c,#2d1d0c)}
+.ms{position:relative;padding-top:calc(var(--u)*50)}
+.ms:before{content:"";position:absolute;left:0;top:0;width:calc(var(--u)*32);height:calc(var(--u)*32);background:var(--lantern);border:calc(var(--u)*5) solid var(--bark);box-shadow:0 0 0 calc(var(--u)*3) var(--lantern);border-radius:50%}
+.ms.dim:before{background:var(--moss2);box-shadow:0 0 0 calc(var(--u)*3) var(--moss2)}
+.ms .d{font:600 calc(var(--u)*46)/1 var(--disp);color:var(--lantern)}
+.ms h3{font-size:calc(var(--u)*40);margin:calc(var(--u)*14) 0 calc(var(--u)*10);color:var(--bone)}
+.ms p{font-size:calc(var(--u)*30);color:#cfc7a8}
+/* slide 11 */
+.studio{position:relative;border:calc(var(--u)*6) solid #1a120a;outline:calc(var(--u)*2) solid #3a2a16;overflow:hidden}
+.studio img{width:100%;height:100%;object-fit:cover}
+/* nav */
+.nav{position:fixed;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:6px;z-index:10;padding:6px 10px;background:#050806cc;border:1px solid #223524}
+.nav button{width:14px;height:14px;padding:0;border:2px solid #4f7a35;background:none;cursor:pointer}
+.nav button.on{background:var(--lantern);border-color:var(--lantern)}
+.count{position:fixed;right:14px;bottom:12px;font:400 12px var(--lab);letter-spacing:.12em;color:#6f7a64;z-index:10}
+.hint{position:fixed;left:14px;bottom:12px;font:400 12px var(--lab);letter-spacing:.12em;color:#6f7a64;z-index:10}
+
+/* narrow screens: slides stack and scroll, same content */
+@media (max-width:900px){
+ :root{--u:.52px}
+ html,body{height:auto}
+ .stage{position:static;width:auto;height:auto;transform:none!important;overflow:visible}
+ .slide{position:relative;inset:auto;opacity:1;visibility:visible;padding:30px 16px 44px;border-bottom:4px solid #000;min-height:0}
+ .s1{padding:0;min-height:520px}.s1 .t{margin:auto 16px 40px}
+ .cols,.c2,.c3,.c4,.c12,.c21{grid-template-columns:1fr!important;gap:22px}
+ .kpis,.stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .tl{grid-template-columns:1fr;margin-top:30px}.tl:before{left:16px;right:auto;top:0;bottom:0;width:6px;height:auto}.ms{padding:0 0 0 54px}.ms:before{top:2px}
+ .hd{flex-wrap:wrap}.hd .lab{margin-left:0;max-width:none;text-align:left;width:100%}
+ .shelfs{grid-template-columns:1fr}
+ .troll{height:300px}
+ .bar{grid-template-columns:1fr}.bar .t{height:20px}
+ .foot,.nav,.count,.hint{display:none}
+ .s2 img.logo{width:100%}
+ .skulls img{width:30%}
+ .chart{height:280px}
+ .cast{height:200px;overflow-x:auto}
+ .reco{flex-direction:column;align-items:flex-start}
+ body{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){.slide{transition:none}}
+
+/* Match the game page while keeping the 16:9 presentation canvas. */
+:root{--bark:#080f17;--bone:#f1e6c9;--parch2:#c5b991;--body:system-ui,-apple-system,'Segoe UI',sans-serif}
+.slide{background:radial-gradient(ellipse at 90% 0%,#19304366,transparent 55%),radial-gradient(ellipse at 0% 100%,#26432566,transparent 65%),var(--bark)}
+a{color:var(--lantern)}button,a{-webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--lantern);outline-offset:4px}
+h2{font-size:calc(var(--u)*76);line-height:1.08}.hd{align-items:center}.hd .lab{font-size:calc(var(--u)*18);line-height:1.5;max-width:28%}.lab{line-height:1.5}.box{border-width:calc(var(--u)*2);box-shadow:none}.box p,.box li{font-size:calc(var(--u)*30);line-height:1.5}.box li.no{color:#b9b397}.box.sm p,.box.sm li{font-size:calc(var(--u)*27)!important}.big{font-size:calc(var(--u)*100)}
+.shot{border-width:calc(var(--u)*2);outline:none}.shot img{object-fit:contain;image-rendering:pixelated}.skulls img,.cast img,.shelfs img{image-rendering:pixelated}.foot{color:#b1b79e;font-size:calc(var(--u)*15)}
+.s1 .bg{left:43%;overflow:hidden}.s1 .bg img{object-position:40% center}.s1 .bg:after{background:linear-gradient(90deg,#080f17,transparent 28%),linear-gradient(0deg,#080f17,transparent 25%)}
+.s1 .t{margin:auto 0 auto calc(var(--u)*96);max-width:calc(var(--u)*860);padding:calc(var(--u)*70) 0}.s1 h1{font-size:calc(var(--u)*112);line-height:1.04}.s1 p{font-size:calc(var(--u)*31);line-height:1.6;max-width:calc(var(--u)*770)}.s1 .hero-logo{width:calc(var(--u)*700);margin-bottom:calc(var(--u)*50)}
+.slide[data-n='3'] .cols{grid-template-rows:auto!important;align-content:start;row-gap:calc(var(--u)*26)}.slide[data-n='3'] .shot{height:auto!important;aspect-ratio:3/1}.slide[data-n='3'] .cols>p{font-size:calc(var(--u)*30)!important;line-height:1.6}
+.slide[data-n='5'] .cast{height:calc(var(--u)*185)}.slide[data-n='5'] .cast img{height:100%;max-width:100%;object-fit:contain}.stats{margin-top:calc(var(--u)*24)}.kpi b{font-size:calc(var(--u)*66)}.kpi span{font-size:calc(var(--u)*25)}
+.bar{grid-template-columns:calc(var(--u)*340) 1fr calc(var(--u)*130);font-size:calc(var(--u)*25)}.bar b{font-size:calc(var(--u)*32)}
+.slide[data-n='9'] .box li,.slide[data-n='9'] .box p{font-size:calc(var(--u)*27)}.slide[data-n='12'] h3{font-size:calc(var(--u)*44)}
+.troll img{object-fit:cover;object-position:25% 25%}.studio img{object-position:center}.reco b{flex:0 0 25%}.reco span{font-size:calc(var(--u)*27)}
+.deck-toolbar{position:fixed;bottom:0;left:0;right:0;z-index:20;min-height:62px;display:flex;align-items:center;justify-content:center;gap:14px;padding:8px 20px;background:#080f17f5;border-top:1px solid #344336;font:14px/1.4 var(--body)}.deck-toolbar a{margin-right:auto;text-decoration:none}.deck-toolbar button{min-width:44px;min-height:44px;border:1px solid #526044;color:var(--bone);background:#132027;font:20px var(--disp);cursor:pointer}.deck-toolbar button:hover{border-color:var(--lantern)}.deck-toolbar button:disabled{opacity:.4;cursor:default}
+.nav{position:static;transform:none;background:none;border:0;padding:0;gap:0}.nav button{width:28px;min-width:28px;height:44px;min-height:44px;border:0;background:none;position:relative}.nav button:before{content:'';position:absolute;width:8px;height:8px;border:1px solid #a5b887;left:10px;top:18px}.nav button.on{background:none}.nav button.on:before{background:var(--lantern);border-color:var(--lantern)}.count{position:static;color:var(--parch2);min-width:58px;text-align:center;font-size:12px}.hint{position:static;margin-left:auto;color:var(--parch2);font-size:10px}.deck-toolbar .fullscreen{font-size:16px;padding:0 12px}
+@media(max-width:1100px){.hint{display:none}.deck-toolbar{gap:8px}}
+@media(max-width:900px){:root{--u:.6px}body{font-size:17px;line-height:1.65;padding-bottom:72px}.slide{padding:40px 22px 46px;overflow:hidden}.slide h2{font-size:clamp(36px,7vw,52px);overflow-wrap:anywhere}.hd{gap:14px;margin-bottom:26px}.hd .lab{max-width:none;font-size:11px;line-height:1.6}.slide h3{font-size:30px}.box{padding:22px}.box p,.box li,.box.sm p,.box.sm li,.tier li,.slide[data-n='9'] .box p,.slide[data-n='9'] .box li{font-size:16px!important}.box li{padding:12px 0 12px 22px}.box li:before{top:22px;left:3px;width:7px;height:7px}.box p{line-height:1.7}.src{font-size:14px!important}.s1{min-height:0;padding-top:0}.s1 .bg{position:relative;left:auto;height:auto;aspect-ratio:2/1;margin:0 -22px}.s1 .bg img{width:100%;height:100%;object-position:top}.s1 .bg:after{background:linear-gradient(0deg,#080f17,transparent 30%)}.s1 .t{margin:0;padding:26px 0 0;max-width:none}.s1 .hero-logo{width:90%;margin-bottom:26px}.s1 h1{font-size:clamp(44px,10vw,64px)}.s1 p{font-size:18px;max-width:none}.s1 .lab{font-size:11px}.s2{padding-top:50px;padding-bottom:50px}.s2 .line{font-size:32px;margin:28px 0}.tag{font-size:11px;line-height:1.4}.slide[data-n='3'] .cols>p{font-size:17px!important}.slide[data-n='3'] .cols>div:nth-child(1){order:1}.slide[data-n='3'] .cols>p:nth-child(4){order:2}.slide[data-n='3'] .cols>div:nth-child(2){order:3}.slide[data-n='3'] .cols>p:nth-child(5){order:4}.slide[data-n='3'] .cols>div:nth-child(3){order:5}.slide[data-n='3'] .cols>p:nth-child(6){order:6}.slide[data-n='3'] h3{font-size:30px!important}.troll{flex:none!important;height:260px}.troll img{height:100%!important;top:0!important;left:0!important;width:100%;object-fit:cover;object-position:25% top}.skulls img{width:28%;max-width:100px}.lines .bubble{font-size:18px}.slide[data-n='5'] .cast{height:160px}.slide[data-n='5'] .cast img{max-width:none}.cap{font-size:11px;line-height:1.5}.kpi span{font-size:15px}.kpi b{font-size:40px}.kpis,.stats{gap:24px 20px}.legend div{font-size:16px;line-height:1.5}.legend i{flex:none}.chart{height:auto;aspect-ratio:900/540}.slide[data-n='6'] .box{padding:6px}.reco b{font-size:30px}.reco span{font-size:17px;line-height:1.7}.tier h3{font-size:34px}.tier .price{font-size:24px;margin:12px 0}.bar{font-size:17px;gap:8px}.bar b{font-size:24px}.ms p{font-size:17px}.ms h3{font-size:26px}.ms .d{font-size:28px}.studio{min-height:220px}.studio img{aspect-ratio:16/9;object-fit:cover}.slide[data-n='12'] h3{font-size:28px}.todo{font-size:10px;line-height:1.6;overflow-wrap:anywhere}.deck-toolbar{justify-content:space-between;min-height:60px;padding:8px 16px}.deck-toolbar a{margin-right:0}.deck-toolbar .nav,.deck-toolbar .count,.deck-toolbar .hint,.deck-toolbar .fullscreen,.deck-toolbar .prev,.deck-toolbar .next{display:none}.mobile-note{color:var(--parch2);font-size:12px}}
+@media(min-width:901px){.mobile-note{display:none}}
+@media print{@page{size:landscape;margin:0}html,body{height:auto;background:var(--bark)}.stage{position:static;width:1920px;height:auto;transform:none!important}.slide{position:relative;visibility:visible!important;opacity:1!important;display:flex!important;width:1920px;height:1080px;break-after:page;print-color-adjust:exact}.deck-toolbar{display:none}}
+
+
+.slide[data-n='1'] .bg img{height:112%;object-position:40% top}.troll img{height:112%!important;top:0!important;left:0!important;width:100%;object-fit:cover;object-position:25% top}
+@media(max-width:900px){.slide{transition:none}.slide[data-n='1'] .bg img{height:100%}}
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+
+<!-- 1 HOOK -->
+<section class="slide s1 on" data-n="1">
+  <div class="bg"><img src="img/key_art.jpg" alt="Vosk the troll stirring a green cauldron while Old Teeth the skull watches" width="1600" height="900"></div>
+  <div class="t">
+    <img class="hero-logo" src="img/logo.png" alt="Witch Doctor's Hut" width="1400" height="330"><span class="lab">Bellatrix Forge Studios presents</span>
+    <h1>You type.<br><em>He brews.</em></h1>
+    <p>A half-dead blue troll brews gross potions above your Windows taskbar. Your typing is the spoon. A skull on the counter roasts him.</p>
+  </div>
+</section>
+
+<!-- 2 ONE LINE -->
+<section class="slide s2" data-n="2">
+  <img class="logo" src="img/logo.png" alt="Witch Doctor's Hut" width="1400" height="330">
+  <p class="line">A grumpy troll brews potions on your taskbar. <em>Your typing is the spoon.</em></p>
+  <div class="tagrow"><span class="tag">Windows 10/11</span><span class="tag">US$ 3.99</span><span class="tag">Free demo</span><span class="tag">About 18 h of play</span><span class="tag">EN · PT-BR · ES</span></div>
+  <div class="foot"><span>Witch Doctor's Hut</span><span>02 / 13</span></div>
+</section>
+
+<!-- 3 HOW IT PLAYS -->
+<section class="slide" data-n="3">
+  <div class="hd"><span class="no">03</span><h2>How it <em>plays</em></h2><span class="lab">You work. He brews.</span></div>
+  <div class="cols c3" style="grid-template-rows:auto 1fr">
+    <div><div class="shot" style="height:calc(var(--u)*420)"><img src="img/shot_1.jpg" alt="Calm green cauldron" width="1440" height="480"></div><h3 style="margin-top:calc(var(--u)*24);font-size:calc(var(--u)*56)">1. Type</h3></div>
+    <div><div class="shot" style="height:calc(var(--u)*420)"><img src="img/shot_2.jpg" alt="The cauldron at its top stage" width="1440" height="480"></div><h3 style="margin-top:calc(var(--u)*24);font-size:calc(var(--u)*56)">2. Heat it</h3></div>
+    <div><div class="shot" style="height:calc(var(--u)*420)"><img src="img/shot_3.jpg" alt="Potion on the counter, skull talking" width="1440" height="480"></div><h3 style="margin-top:calc(var(--u)*24);font-size:calc(var(--u)*56)">3. Sell, or blow it</h3></div>
+    <p style="font-size:calc(var(--u)*32)">Every key you press, in any program, stirs the cauldron. The game counts the rhythm, never what you write.</p>
+    <p style="font-size:calc(var(--u)*32)">Steady rhythm climbs six stages: SIMMER, BUBBLING, ROILING, WITCHFIRE, STORMBREW, ANCESTRAL. Sparks, smoke, fireworks over your whole screen.</p>
+    <p style="font-size:calc(var(--u)*32)">Type like a maniac and the pot boils over: BOOM, Vosk goes down face first. Sold potions pay the skull's rent.</p>
+  </div>
+  <div class="foot"><span>Witch Doctor's Hut</span><span>03 / 13</span></div>
+</section>
+
+<!-- 4 TROLL + SKULL -->
+<section class="slide" data-n="4">
+  <div class="hd"><span class="no">04</span><h2>The troll and <em>the skull</em></h2><span class="lab">Two voices, one hut</span></div>
+  <div class="cols c12">
+    <div style="display:flex;flex-direction:column;gap:calc(var(--u)*22);min-height:0">
+      <div class="troll" style="flex:1"><img src="img/key_art.jpg" style="height:calc(var(--u)*560*1.0);left:calc(var(--u)*-30);top:calc(var(--u)*-20)" alt="Vosk the troll at the cauldron" width="1600" height="900"></div>
+      <p><b style="color:var(--lantern)">Vosk.</b> Blue swamp troll back from a war. Half a tusk, one good eye, a hole in his belly. He lands on a flaming cannonball in front of his uncle's hut. The sign says GONE ON VACATION. BACK SOMEDAY. MAYBE.</p>
+    </div>
+    <div class="box sm">
+      <div class="skulls"><img src="img/skull_neutral.png" alt="" width="330" height="345"><img src="img/skull_laugh.png" alt="" width="330" height="345"><img src="img/skull_sarcastic.png" alt="" width="330" height="345"></div>
+      <p style="margin-top:calc(var(--u)*18);font-size:calc(var(--u)*28)"><b style="color:var(--lantern)">Old Teeth.</b> The family's founding ancestor, now a skull with a candle on his head and opinions about everything. He keeps the books and takes the coins.</p>
+      <div class="lines">
+        <div class="bubble">"Who let a half-dead troll in my hut?"</div>
+        <div class="bubble">"Fine. Not a trespasser. A lodger. Lodgers pay rent, boy."</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Witch Doctor's Hut</span><span>04 / 13</span></div>
+</section>
+
+<!-- 5 HUT LIFE -->
+<section class="slide" data-n="5">
+  <div class="hd"><span class="no">05</span><h2>Life in <em>the hut</em></h2><span class="lab">Game art, untouched</span></div>
+  <div class="box" style="padding:calc(var(--u)*18)"><div class="cast"><img src="img/full_cast.png" alt="Fourteen of the visitors who knock at the hut" width="2638" height="300"></div></div>
+  <div class="shelfs" style="margin-top:calc(var(--u)*34)">
+    <div><div class="sh"><img class="long" src="img/potions.png" alt="Potions" width="672" height="224"></div><p class="cap">Potions: a line and a star rarity each</p></div>
+    <div><div class="sh"><img class="long" src="img/ingredients.png" alt="Ingredients" width="672" height="224"></div><p class="cap">Ingredients: nothing arrives by itself</p></div>
+    <div><div class="sh"><img class="long" src="img/gear.png" alt="Gear" width="784" height="112" style="padding:calc(var(--u)*28) 0"></div><p class="cap">Gear: seven slots, bandages to shaman</p></div>
+  </div>
+  <div class="stats">
+    <div class="kpi o"><b>42</b><span>kinds of visitor</span></div>
+    <div class="kpi g"><b>49</b><span>recipes</span></div>
+    <div class="kpi"><b>34</b><span>ingredients, all with art</span></div>
+    <div class="kpi b"><b>5</b><span>cauldrons</span></div>
+    <div class="kpi e"><b>12</b><span>blue runes that wake</span></div>
+  </div>
+  <div class="foot"><span>Counts from teams/content.json and brew/rules.js</span><span>05 / 13</span></div>
+</section>
+
+<!-- 6 ECONOMY -->
+<section class="slide" data-n="6">
+  <div class="hd"><span class="no">06</span><h2>Progression that <em>respects attention</em></h2><span class="lab">Simulated 30 h per player type</span></div>
+  <div class="kpis">
+    <div class="kpi o"><b>16 h</b><span>engaged player reaches Witch Doctor</span></div>
+    <div class="kpi g"><b>18 h</b><span>typical player. Same for heavy typers and mouse-only</span></div>
+    <div class="kpi b"><b>29 h</b><span>player who never opens the shop. Slower, never stuck</span></div>
+    <div class="kpi"><b>0</b><span>late rents in 6 profiles</span></div>
+    <div class="kpi e"><b>142</b><span>items ever held, 30 h engaged. It was 4,364 before the fix</span></div>
+  </div>
+  <div class="cols c21" style="grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)">
+    <div class="box" style="padding:calc(var(--u)*14)"><svg id="chart" class="chart" viewBox="0 0 900 540" role="img" aria-label="Hours to reach each rank for five player types"></svg></div>
+    <div>
+      <div class="legend" id="legend"></div>
+      <p class="src" style="margin-top:calc(var(--u)*18)">Bot play2.js, 30 h per profile, seed 1, rules embedded in the game. Economy lab: mean of 3 seeds. Bots are not humans: a human test is still owed.</p>
+    </div>
+  </div>
+  <div class="foot"><span>BALANCE-REPORT.html · economy/ECONOMY-LAB.html</span><span>06 / 13</span></div>
+</section>
+
+<!-- 7 PLATFORMS -->
+<section class="slide" data-n="7">
+  <div class="hd"><span class="no">07</span><h2>Where it <em>runs</em></h2><span class="lab">What exists, and what is only a plan</span></div>
+  <div class="cols c3">
+    <div class="box slimeb"><span class="lab" style="color:var(--slime)">In development</span><h3 style="margin:calc(var(--u)*14) 0">Windows</h3><p>The main game. A transparent window above the taskbar, counting keys in any program. Portable exe built, about 280 MB. Windows 10 or 11, 64-bit, no account, no internet.</p><ul style="margin-top:calc(var(--u)*20)"><li>Click-through, draggable</li><li>Hides under fullscreen apps</li><li>Quit from the tray</li></ul></div>
+    <div class="box gold"><span class="lab" style="color:var(--lantern)">Testing</span><h3 style="margin:calc(var(--u)*14) 0">Phone, in the browser</h3><p>Tap to stir. A different product from the taskbar: short sessions, no keyboard. Treated as an experiment, with no store release promised.</p><ul style="margin-top:calc(var(--u)*20)"><li>Web build exists</li><li>App stores: not started</li><li>Mic features need HTTPS</li></ul></div>
+    <div class="box"><span class="lab">Planned</span><h3 style="margin:calc(var(--u)*14) 0">Full-screen hut</h3><p>A free update after launch: the whole hut in a big window, a door to new rooms. Not built yet. Keeps the taskbar game as the product and gives a second launch moment.</p><ul style="margin-top:calc(var(--u)*20)"><li>Free update, no date</li><li>Same save</li><li>Sandbox first</li></ul></div>
+  </div>
+  <div class="foot"><span>NIGHT-BACKLOG.md · MAPA-FUTURO.html</span><span>07 / 13</span></div>
+</section>
+
+<!-- 8 DEMO / EA / 1.0 -->
+<section class="slide" data-n="8">
+  <div class="hd"><span class="no">08</span><h2>Demo, early access, <em>1.0</em></h2><span class="lab">Recommendation shown. The decision is Bruno's</span></div>
+  <div class="cols c3" style="flex:none">
+    <div class="box slimeb tier"><h3 style="color:var(--slime)">Demo</h3><div class="price">Free</div><ul><li>Trespasser to Apprentice, about 1.5 h</li><li>9 visitors, 2 cauldrons, 2 gear pieces</li><li>Same loop, same skull, 3 languages</li><li class="no">No runes, no late ranks</li></ul></div>
+    <div class="box tier"><h3>Early access</h3><div class="price">Option, not advised</div><ul><li>Today's whole 8-rank game</li><li>Promises updates a solo dev must keep</li><li>Splits the one big launch in two</li><li class="no">Adds nothing the game still lacks</li></ul></div>
+    <div class="box gold tier"><h3>1.0</h3><div class="price">US$ 3.99</div><ul><li>Eight promotions, about 18 h</li><li>42 visitors, 5 cauldrons, 12 runes</li><li>Free full-screen update after launch</li><li class="no">Phone: experiment, no promise</li></ul></div>
+  </div>
+  <div class="reco"><b>Go straight to 1.0.</b><span>Demo first, for wishlists and Next Fest. Launch the full game about a week after the festival, then the free full-screen update as the second beat. Early access stays as the fallback if the 1.0 checklist is not green by 10 January 2027.</span></div>
+  <div class="foot"><span>RELEASE-PLAN.html</span><span>08 / 13</span></div>
+</section>
+
+<!-- 9 MARKET -->
+<section class="slide" data-n="9">
+  <div class="hd"><span class="no">09</span><h2>Market and <em>price</em></h2><span class="lab">Estimates, with the doubt left in</span></div>
+  <div class="cols c12">
+    <div>
+      <div class="bars">
+        <div class="bar"><span>Melvor Idle</span><div class="t"><i style="width:100%"></i></div><b>~424k</b></div>
+        <div class="bar"><span>Rusty's Retirement (~$7)</span><div class="t"><i style="width:75%"></i></div><b>~320k</b></div>
+        <div class="bar"><span>Ropuka's Idle Island ($3.99)</span><div class="t"><i style="width:21.6%"></i></div><b>~91k</b></div>
+        <div class="bar"><span>Median 2024 Steam release</span><div class="t"><i style="width:0.6%;min-width:4px"></i></div><b>~1.5k</b></div>
+      </div>
+      <p class="src" style="margin-top:calc(var(--u)*24)">Copies on Steam, Raijin estimates (medium confidence). Sources disagree by 2 to 15 times. Melvor is not a taskbar game. Our closest comp is Ropuka: same price, a game that sits on the desktop.</p>
+    </div>
+    <div class="box gold">
+      <div class="big" style="color:var(--lantern)">US$ 3.99</div>
+      <p style="margin:calc(var(--u)*10) 0 calc(var(--u)*18)">About US$ 2.79 net per sale after Steam's 30%, before tax and refunds. Launch discount 10%, never past 15%.</p>
+      <ul>
+        <li>1,500 copies, no marketing: about US$ 4k</li>
+        <li>20,000 copies, plan followed: about US$ 56k <i style="color:var(--parch2)">(our hypothesis)</i></li>
+        <li>91,000 copies, Ropuka-level: about US$ 254k</li>
+        <li class="no">Go or no-go: under 1,000 wishlists on 22 Feb, do not launch the week after</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>RESEARCH-MARKET.json · MARKETING-PLAN.md</span><span>09 / 13</span></div>
+</section>
+
+<!-- 10 ROADMAP -->
+<section class="slide" data-n="10">
+  <div class="hd"><span class="no">10</span><h2>Road to <em>launch</em></h2><span class="lab">Dates to confirm in Steamworks</span></div>
+  <div class="tl">
+    <div class="ms"><div class="d">Oct to Nov</div><h3>Freeze and fix</h3><p>Blockers closed, demo build wired, 30 minute human test, rebuilt exe.</p></div>
+    <div class="ms dim"><div class="d">Nov to Dec</div><h3>Pages and demo</h3><p>Steam app, Coming Soon page, itch demo, Steam demo app.</p></div>
+    <div class="ms dim"><div class="d">10 Jan 2027</div><h3>Next Fest signup</h3><p>Press preview build by 25 Jan. Fallback festival: June 2027.</p></div>
+    <div class="ms dim"><div class="d">22 Feb to 1 Mar</div><h3>Steam Next Fest</h3><p>Wishlist check on day one decides the date.</p></div>
+    <div class="ms dim"><div class="d">About 8 Mar</div><h3>1.0 launch</h3><p>Then the free full-screen update. Phone only if the PC proves itself.</p></div>
+  </div>
+  <div class="foot"><span>MARKETING-PLAN.md section 3 · steam/STORE_PAGE_TEXT.txt</span><span>10 / 13</span></div>
+</section>
+
+<!-- 11 STUDIO -->
+<section class="slide" data-n="11">
+  <div class="hd"><span class="no">11</span><h2>The <em>studio</em></h2><span class="lab">Bellatrix Forge Studios</span></div>
+  <div class="cols c12">
+    <div class="studio"><img src="img/studio.jpg" alt="Bellatrix Forge Studios: a blue star over a dark swamp" width="1200" height="675"></div>
+    <div class="box sm">
+      <p><b style="color:var(--lantern)">One person, one star.</b> Bruno builds and decides everything that enters the game. An AI-assisted pipeline does the heavy lifting: art, voices, balance bots and QA scripts, all declared openly.</p>
+      <ul style="margin-top:calc(var(--u)*18)">
+        <li>Art made with AI tools, then cut, aligned and edited by hand</li>
+        <li>Voices and some music generated, English voice only</li>
+        <li>Every economy change is played by bots before it ships</li>
+        <li>Pixel and material rules written down in STANDARDS.md</li>
+        <li>Bellatrix is a blue giant star in Orion: the studio's home sky</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>Witch Doctor's Hut</span><span>11 / 13</span></div>
+</section>
+
+<!-- 12 ASK -->
+<section class="slide" data-n="12">
+  <div class="hd"><span class="no">12</span><h2>What we <em>ask</em></h2><span class="lab">Four small things</span></div>
+  <div class="cols c4">
+    <div class="box gold"><div class="big" style="color:var(--lantern)">1</div><h3 style="margin:calc(var(--u)*12) 0">Wishlist it</h3><p>When the Steam page opens, one click. It is the number the whole launch hangs on.</p></div>
+    <div class="box"><div class="big">2</div><h3 style="margin:calc(var(--u)*12) 0">Play the demo</h3><p>About 90 minutes. Tell us where you stopped, and why.</p></div>
+    <div class="box"><div class="big">3</div><h3 style="margin:calc(var(--u)*12) 0">Show it</h3><p>Creators and press can ask for a key. The game is made to be seen in a clip.</p></div>
+    <div class="box"><div class="big">4</div><h3 style="margin:calc(var(--u)*12) 0">Test it cold</h3><p>One honest 30 minute run on a clean Windows PC, antivirus on.</p></div>
+  </div>
+  <p style="margin-top:calc(var(--u)*26)"><span class="todo">TODO Bruno: tune this slide to the audience (press, creators, publisher)</span></p>
+  <div class="foot"><span>Witch Doctor's Hut</span><span>12 / 13</span></div>
+</section>
+
+<!-- 13 CLOSE -->
+<section class="slide s1" data-n="13">
+  <div class="bg"><img src="img/cover_vertical.jpg" alt="" style="object-position:50% 40%" width="720" height="1279"></div>
+  <div class="t">
+    <span class="lab">Bellatrix Forge Studios</span>
+    <img src="img/logo.png" alt="Witch Doctor's Hut" style="width:calc(var(--u)*780);filter:drop-shadow(0 5px 0 #000)" width="1400" height="330">
+    <p style="margin-top:calc(var(--u)*30)">He came back from the war. He landed on your taskbar.</p>
+    <div class="tagrow" style="margin-top:calc(var(--u)*34)"><span class="todo">TODO: Steam wishlist URL</span><span class="todo">TODO: itch demo URL</span></div>
+  </div>
+</section>
+
+</div>
+<nav class="deck-toolbar" aria-label="Presentation controls"><a href="index.html">← Game page</a><button class="prev" id="prev" aria-label="Previous slide">←</button><div class="nav" id="nav" aria-label="Choose slide"></div><button class="next" id="next" aria-label="Next slide">→</button><div class="count" id="count" role="status" aria-live="polite">1 / 13</div><span class="hint">← → to navigate · F for fullscreen</span><button class="fullscreen" id="fullscreen" aria-label="Toggle fullscreen">Fullscreen</button><span class="mobile-note">13 slides · Scroll to explore</span></nav>
+
+<script>
+(function(){
+  var st=document.getElementById('stage'),sl=[].slice.call(document.querySelectorAll('.slide')),cur=0;
+  function mobile(){return window.innerWidth<=900}
+  function fit(){
+    if(mobile()){st.style.transform='';st.style.left='';st.style.top='';return}
+    var s=Math.min(window.innerWidth/1920,(window.innerHeight-72)/1080);
+    st.style.transform='scale('+s+')';
+    st.style.left=(window.innerWidth-1920*s)/2+'px';st.style.top=(window.innerHeight-72-1080*s)/2+'px';
+  }
+  var nav=document.getElementById('nav');
+  sl.forEach(function(_,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Slide '+(i+1));b.onclick=function(e){e.stopPropagation();go(i)};nav.appendChild(b)});
+  function go(i){
+    cur=Math.max(0,Math.min(sl.length-1,i));
+    sl.forEach(function(s,k){s.classList.toggle('on',k===cur);s.setAttribute('aria-hidden',!mobile()&&k!==cur);s.inert=!mobile()&&k!==cur});
+    [].forEach.call(nav.children,function(b,k){b.classList.toggle('on',k===cur);b.setAttribute('aria-current',k===cur?'step':'false')});
+    document.getElementById('count').textContent=(cur+1)+' / '+sl.length;document.getElementById('prev').disabled=cur===0;document.getElementById('next').disabled=cur===sl.length-1;
+    try{history.replaceState(null,'','#'+(cur+1))}catch(e){}
+  }
+  document.addEventListener('keydown',function(e){
+    if(mobile()||e.target.closest('button,a,input,select,textarea,video')||e.altKey||e.ctrlKey||e.metaKey)return;
+    if(['ArrowRight','ArrowDown','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(cur+1)}
+    else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].indexOf(e.key)>-1){e.preventDefault();go(cur-1)}
+    else if(e.key==='Home')go(0);else if(e.key==='End')go(sl.length-1);
+    else if(e.key==='f'||e.key==='F'){if(document.fullscreenElement)document.exitFullscreen();else document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen().catch(function(){})}
+  });
+  document.getElementById('prev').addEventListener('click',function(){go(cur-1)});
+  document.getElementById('next').addEventListener('click',function(){go(cur+1)});
+  document.getElementById('fullscreen').addEventListener('click',function(){if(document.fullscreenElement){document.exitFullscreen().catch(function(){})}else if(document.documentElement.requestFullscreen){document.documentElement.requestFullscreen().catch(function(){})}});
+  window.addEventListener('resize',function(){fit();go(cur)});
+  var h=parseInt((location.hash||'').slice(1),10);fit();go(h>0?h-1:0);
+
+  /* slide 6 chart: hour at which each player type earns each of the 8 promotions (BALANCE-REPORT.html, section 1) */
+  var D=[
+   {n:'Engaged: buys every minute, pays the skull early',c:'#f2a23a',v:[.1,.5,1.2,2.8,4.5,7,10.5,16]},
+   {n:'Typical: buys every 10 minutes',c:'#9bd13c',v:[.1,.5,1.5,3,5,8,12,18]},
+   {n:'Light typist: 45 keys a minute, half the time away',c:'#6a8bdc',v:[.2,1.3,2.7,6,9.2,12.4,15.2,18.1]},
+   {n:'Mouse only, no keyboard',c:'#d9c897',v:[.3,1.2,2.5,5.4,8.3,11.4,13.8,18],dash:1},
+   {n:'Never opens the shop',c:'#d9632a',v:[.1,.5,1.5,3.2,8,13,19.5,29]}];
+  var W=900,H=540,L=62,R=24,T=18,B=48,X=function(h){return L+(W-L-R)*h/30},Y=function(r){return H-B-(H-B-T)*(r-1)/7};
+  var s='<rect x="'+X(0)+'" y="'+T+'" width="'+(X(1.5)-X(0))+'" height="'+(H-B-T)+'" fill="#9bd13c" opacity=".10"/>';
+  for(var r=1;r<=8;r++)s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(r)+'" y2="'+Y(r)+'" stroke="#223524" stroke-width="1"/><text x="'+(L-10)+'" y="'+(Y(r)+5)+'" text-anchor="end">'+r+'</text>';
+  for(var h2=0;h2<=30;h2+=5)s+='<text x="'+X(h2)+'" y="'+(H-B+24)+'" text-anchor="middle">'+h2+' h</text>';
+  s+='<text x="'+(L)+'" y="'+(T+2)+'" fill="#bfae7c">PROMOTION</text><text x="'+(X(1.5)+8)+'" y="'+(Y(1)-8)+'" fill="#9bd13c" style="fill:#9bd13c">DEMO ENDS (promotion 3)</text>';
+  D.forEach(function(d){
+    var pts=d.v.map(function(h,i){return X(h)+','+Y(i+1)}).join(' ');
+    s+='<polyline points="'+X(0)+','+Y(1)+' '+pts+'" fill="none" stroke="'+d.c+'" stroke-width="4" '+(d.dash?'stroke-dasharray="9 6"':'')+' stroke-linejoin="round"/>';
+    d.v.forEach(function(h,i){s+='<rect x="'+(X(h)-4)+'" y="'+(Y(i+1)-4)+'" width="8" height="8" fill="'+d.c+'"/>'});
+  });
+  document.getElementById('chart').innerHTML=s;
+  document.getElementById('legend').innerHTML=D.map(function(d){return '<div><i style="background:'+d.c+'"></i><span>'+d.n+'</span></div>'}).join('');
+})();
+</script>
+</body>
+</html>

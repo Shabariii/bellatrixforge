@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Witch Doctor's Hut | Bellatrix Forge Studios</title>
+<meta name="description" content="A half-dead troll brews gross potions on your Windows taskbar. Your typing is the spoon. A skull roasts him. Free demo. By Bellatrix Forge Studios.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230d1210'/%3E%3Cpath d='M6 15h20v3c0 6-4 9-10 9S6 24 6 18z' fill='%23222'/%3E%3Crect x='5' y='13' width='22' height='3' fill='%23444'/%3E%3Ccircle cx='12' cy='11' r='2' fill='%239bd13c'/%3E%3Ccircle cx='18' cy='9' r='2.5' fill='%239bd13c'/%3E%3Ccircle cx='22' cy='11.5' r='1.5' fill='%23f2a23a'/%3E%3C/svg%3E">
+<style>
+/* Witch Doctor's Hut: studio page. Palette taken from the game: bark black-green, swamp, slime, bone, lantern. */
+@font-face{font-family:'Pixelify Sans';font-weight:400 700;font-display:swap;src:url(fonts/PixelifySans.ttf) format('truetype')}
+@font-face{font-family:'Silkscreen';font-weight:400;font-display:swap;src:url(fonts/Silkscreen-Regular.ttf) format('truetype')}
+:root{
+  --bark:#0b100d;--bark2:#111a14;--moss:#1a2a1d;--moss2:#243a27;--swamp:#4f7a35;--slime:#9bd13c;
+  --bone:#eadfbd;--parch:#d9c897;--parch2:#bfae7c;--ink:#1c140a;--lantern:#f2a23a;--ember:#d9632a;--blue:#6a8bdc;
+  --disp:'Pixelify Sans','Courier New',monospace;--lab:'Silkscreen','Courier New',monospace;--body:Georgia,'Palatino Linotype',Palatino,serif;
+  --g:clamp(16px,4vw,56px);
+}
+*{box-sizing:border-box;font-variant-ligatures:none}
+html{scroll-behavior:smooth;background:var(--bark)}
+body{margin:0;background:var(--bark);color:var(--bone);font:400 17px/1.6 var(--body);overflow-x:hidden;
+  background-image:radial-gradient(1200px 600px at 85% -5%,rgba(242,162,58,.10),transparent 60%),radial-gradient(900px 700px at -10% 40%,rgba(79,122,53,.14),transparent 60%)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+::selection{background:var(--lantern);color:var(--ink)}
+::-webkit-scrollbar{width:12px;background:var(--bark)}::-webkit-scrollbar-thumb{background:var(--moss2);border:2px solid var(--bark);border-radius:6px}
+img,video{max-width:100%;display:block}
+img{height:auto}
+img.px{image-rendering:auto}
+a{color:var(--lantern)}
+h1,h2,h3{font-family:var(--disp);font-weight:600;line-height:1.05;margin:0;letter-spacing:.01em}
+.lab{font:400 12px/1 var(--lab);letter-spacing:.14em;text-transform:uppercase;color:var(--parch2)}
+.wrap{padding:0 var(--g);max-width:1480px;margin:0 auto}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:40;background:linear-gradient(#0b100df2,#0b100dd9);backdrop-filter:blur(6px);border-bottom:2px solid #000;box-shadow:0 1px 0 #2b3d2c}
+.top .wrap{display:flex;align-items:center;gap:20px;height:56px}
+.top .mark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--bone);font:600 20px var(--disp)}
+.top .mark img{width:28px;height:28px;object-fit:contain}
+.top nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.top nav a{font:400 11px var(--lab);letter-spacing:.12em;text-transform:uppercase;color:var(--parch);text-decoration:none;padding:8px 10px;border-bottom:2px solid transparent}
+.top nav a:hover{color:var(--lantern);border-color:var(--lantern)}
+.lang{display:flex;border:2px solid var(--moss2)}
+.lang button{font:400 11px var(--lab);background:none;border:0;color:var(--parch2);padding:7px 9px;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--lantern);color:var(--ink)}
+
+/* hero: the key art is the window of the hut, the ledger hangs on the right */
+.hero{position:relative;padding:var(--g) 0 0}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(300px,1fr);grid-template-areas:"win led" "below led";grid-template-rows:auto 1fr;gap:clamp(18px,2.4vw,34px) clamp(18px,3vw,44px);align-items:start}
+.window{grid-area:win}.below{grid-area:below;display:flex;flex-direction:column;gap:22px}.ledger{grid-area:led}
+.window{position:relative;border:6px solid #1a120a;outline:2px solid #3a2a16;box-shadow:0 0 0 2px #000,0 30px 60px #000a,inset 0 0 40px #000;background:#000;overflow:hidden}
+.window img.art{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.window:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 90px #000c;pointer-events:none}
+.window .logo{position:absolute;left:46%;top:3%;width:50%;height:auto;filter:drop-shadow(0 4px 0 #000) drop-shadow(0 0 18px #9bd13c55)}
+.ledger{display:flex;flex-direction:column;gap:22px;padding:6px 0}
+.ledger h1{font-size:clamp(34px,4.4vw,64px);color:var(--bone);text-shadow:0 3px 0 #000}
+.ledger h1 em{font-style:normal;color:var(--lantern)}
+.ledger p{margin:0;color:#d8d0b0}
+.pitch{font-size:clamp(17px,1.5vw,20px)}
+.plaques{display:flex;flex-direction:column;gap:12px}
+.plaque{position:relative;display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--ink);padding:14px 18px 14px 16px;
+  background:linear-gradient(180deg,#e3d3a1,#c9b783);border:3px solid #2a1a0c;box-shadow:0 5px 0 #000,inset 0 0 0 2px #efe3bd88;transition:transform .12s}
+.plaque:before,.plaque:after{content:"";position:absolute;top:50%;width:8px;height:8px;margin-top:-4px;background:#3a2a16;border-radius:50%}
+.plaque:before{left:-14px;box-shadow:0 0 0 3px #1a120a}.plaque:after{right:-14px;box-shadow:0 0 0 3px #1a120a}
+.plaque:hover{transform:translateY(-3px) rotate(-.6deg)}
+.plaque b{font:600 22px/1 var(--disp)}
+.plaque small{display:block;font:400 11px var(--lab);letter-spacing:.1em;opacity:.8;margin-top:4px}
+.plaque.green{background:linear-gradient(180deg,#a8d94a,#78a82a)}
+.plaque .ic{width:34px;height:34px;flex:none}
+.todo{font:400 10px var(--lab);letter-spacing:.1em;color:var(--lantern);border:1px dashed var(--lantern);padding:3px 6px;margin-left:auto;white-space:nowrap}
+.tags{display:flex;flex-wrap:wrap;gap:10px 14px;margin-top:2px}
+.tag{position:relative;font:400 11px/1 var(--lab);letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--parch);padding:9px 12px 8px 20px;clip-path:polygon(12px 0,100% 0,100% 100%,12px 100%,0 50%)}
+.tag:before{content:"";position:absolute;left:8px;top:50%;width:5px;height:5px;margin-top:-2.5px;border-radius:50%;background:var(--bark)}
+.skullnote{display:grid;grid-template-columns:78px 1fr;gap:12px;align-items:end}
+.skullnote img{width:78px}
+.bubble{position:relative;background:var(--bone);color:var(--ink);padding:10px 14px;border:3px solid #1a120a;font:600 15px/1.35 var(--disp);box-shadow:4px 4px 0 #000}
+.bubble:before{content:"";position:absolute;left:-14px;bottom:14px;border:7px solid transparent;border-right-color:#1a120a;border-left:0}
+.bubble:after{content:"";position:absolute;left:-8px;bottom:16px;border:5px solid transparent;border-right-color:var(--bone);border-left:0}
+.bubble cite{display:block;font:400 10px var(--lab);letter-spacing:.12em;text-transform:uppercase;color:#6b5a38;margin-top:5px;font-style:normal}
+
+/* sections */
+section{padding:clamp(48px,8vw,110px) 0 0;position:relative}
+.sh{display:flex;align-items:baseline;gap:18px;margin-bottom:clamp(22px,3vw,40px);border-bottom:2px dashed #2b3d2c;padding-bottom:14px}
+.sh .no{font:400 13px var(--lab);color:var(--lantern);letter-spacing:.14em}
+.sh h2{font-size:clamp(30px,4vw,56px)}
+.sh .aside{margin-left:auto;font:400 11px var(--lab);letter-spacing:.12em;color:var(--parch2);text-transform:uppercase;text-align:right}
+
+/* trailers */
+.reel{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(16px,2.6vw,34px);align-items:start}
+.screen{border:6px solid #1a120a;outline:2px solid #3a2a16;background:#000;box-shadow:0 20px 40px #0008}
+.screen video{width:100%;aspect-ratio:16/9;background:#000}
+.cap{margin-top:10px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.cap b{font:600 20px var(--disp);color:var(--bone)}
+.cap span{color:var(--parch2);font-size:15px}
+.reel .small .screen{outline-color:#2a3d2b}
+
+/* how it plays: three jars */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,28px)}
+.step{position:relative;background:linear-gradient(#142016,#0e1610);border:3px solid #223524;padding:0 0 18px;box-shadow:0 8px 0 #000}
+.step img{width:100%;aspect-ratio:3/1;object-fit:cover;border-bottom:3px solid #000}
+.step .n{position:absolute;left:14px;top:-18px;font:600 38px/1 var(--disp);color:var(--ink);background:var(--lantern);padding:6px 12px 4px;transform:rotate(-3deg);box-shadow:0 4px 0 #000}
+.step h3{font-size:28px;margin:30px 18px 6px;color:var(--lantern)}
+.step p{margin:0 18px;color:#cfc7a8;font-size:16px}
+.step .margin{margin:14px 18px 0;font:italic 15px/1.4 var(--body);color:var(--slime);border-left:3px solid var(--swamp);padding-left:10px}
+.margin:before{content:"Old Teeth: ";font:400 10px var(--lab);letter-spacing:.12em;text-transform:uppercase;color:var(--parch2);font-style:normal}
+
+/* features: parchment tags hanging on a string */
+.rail{position:relative;padding-top:34px}
+.rail:before{content:"";position:absolute;left:-2%;right:-2%;top:12px;height:5px;background:linear-gradient(#5b3d1c,#2d1d0c);border-radius:3px;box-shadow:0 3px 0 #000}
+.tagsgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:34px clamp(14px,1.8vw,26px)}
+.hang{position:relative;background:linear-gradient(#e0d0a0,#c8b680);color:var(--ink);padding:26px 18px 20px;border:2px solid #2a1a0c;clip-path:polygon(0 0,calc(50% - 16px) 0,50% 14px,calc(50% + 16px) 0,100% 0,100% 100%,0 100%);
+  transform-origin:50% -26px;transition:transform .3s;box-shadow:inset 0 0 0 2px #fff4;filter:drop-shadow(0 6px 0 #000)}
+.hang:nth-child(odd){transform:rotate(-.8deg)}.hang:nth-child(even){transform:rotate(.9deg)}
+.hang:hover{transform:rotate(0)}
+.hang:before{content:"";position:absolute;left:50%;top:-34px;width:2px;height:40px;background:#c9a05a;box-shadow:0 0 0 1px #0007}
+.hang h3{font-size:22px;margin-bottom:6px;color:#3c2208}
+.hang p{margin:0;font-size:15px;line-height:1.45}
+.hang .lab{color:#6b5a38;display:block;margin-bottom:8px}
+
+/* hut life */
+.life{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(18px,3vw,40px)}
+.panel{background:linear-gradient(#142016,#0d150f);border:3px solid #223524;padding:18px;box-shadow:0 8px 0 #000;position:relative}
+.panel h3{font-size:24px;color:var(--lantern);margin-bottom:6px}
+.panel p{margin:0 0 10px;color:#cfc7a8;font-size:16px}
+.panel.wide{grid-column:1/-1}
+.panel,.jar,.step,.pl,.reel>div,.two>div{min-width:0}
+.cast{overflow-x:auto;padding:6px 0 14px;scrollbar-width:thin}
+.cast img{height:240px;width:auto;max-width:none;filter:drop-shadow(0 6px 0 #000)}
+.shelf{border-bottom:10px solid #4a2f14;box-shadow:0 8px 0 #000;margin:6px 0 4px;padding-bottom:2px}
+.shelf img{width:100%;height:auto;image-rendering:auto}
+.wall{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.wall img{width:100%;aspect-ratio:3/1;object-fit:cover;border:3px solid #000;outline:2px solid #3a2a16}
+
+/* demo vs full */
+.jars{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,3vw,44px)}
+.jar{position:relative;padding:26px 24px 24px;border:3px solid #223524;background:linear-gradient(#142016,#0d150f);box-shadow:0 8px 0 #000}
+.jar.full{border-color:#7a5a1e;background:linear-gradient(#251a0a,#150f06)}
+.jar h3{font-size:32px;color:var(--slime)}.jar.full h3{color:var(--lantern)}
+.jar .price{font:600 46px/1 var(--disp);margin:6px 0 14px;color:var(--bone)}
+.jar ul{list-style:none;margin:0;padding:0}
+.jar li{padding:9px 0 9px 30px;border-top:1px dashed #2b3d2c;position:relative;font-size:16px;color:#d6cdae}
+.jar li:before{content:"";position:absolute;left:4px;top:16px;width:12px;height:12px;background:var(--slime);transform:rotate(45deg)}
+.jar.full li:before{background:var(--lantern)}
+.jar li.no{color:#8d8566}.jar li.no:before{background:none;border:2px solid #5d5640}
+.jar .stamp{position:absolute;right:16px;top:16px;font:400 11px var(--lab);letter-spacing:.14em;color:var(--ink);background:var(--slime);padding:6px 9px;transform:rotate(3deg)}
+.jar.full .stamp{background:var(--lantern)}
+
+/* platforms */
+.plat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,28px)}
+.pl{border:3px solid #223524;background:#0f1811;padding:20px 20px 22px;position:relative}
+.pl .st{position:absolute;right:14px;top:14px;font:400 10px var(--lab);letter-spacing:.12em;padding:5px 8px;color:var(--ink)}
+.st.live{background:var(--slime)}.st.test{background:var(--lantern)}.st.plan{background:var(--parch2)}
+.pl h3{font-size:26px;margin-bottom:8px}
+.pl p{margin:0;color:#cfc7a8;font-size:16px}
+.req{margin-top:22px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.req div{border-top:3px solid var(--swamp);padding-top:8px}
+.req b{display:block;font:600 22px var(--disp);color:var(--bone)}
+
+/* honest + press */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(18px,3vw,44px)}
+.note{border-left:4px solid var(--lantern);padding:6px 0 6px 18px;color:#d9d0b0}
+.note p{margin:0 0 10px}
+table.facts{width:100%;border-collapse:collapse;font-size:16px}
+table.facts td{padding:9px 6px;border-top:1px dashed #2b3d2c;vertical-align:top}
+table.facts td:first-child{font:400 11px var(--lab);letter-spacing:.12em;text-transform:uppercase;color:var(--parch2);width:34%;padding-top:13px}
+.dl{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.dl a{font:400 11px var(--lab);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--parch);border:2px solid var(--moss2);padding:9px 12px}
+.dl a:hover{border-color:var(--lantern);color:var(--lantern)}
+
+footer{margin-top:clamp(56px,8vw,120px);position:relative;border-top:3px solid #000;background:#050806}
+footer .banner{position:relative;height:clamp(150px,22vw,300px);overflow:hidden}
+footer .banner img{width:100%;height:100%;object-fit:cover;opacity:.85}
+footer .banner:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,#050806)}
+footer .in{display:flex;gap:20px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:22px 0 40px}
+footer .in p{margin:0;color:var(--parch2);font-size:14px}
+footer b{font:600 20px var(--disp);color:var(--bone)}
+
+@media (max-width:1100px){
+  .hero .wrap{grid-template-columns:minmax(0,1fr);grid-template-areas:"win" "led" "below"}.window .logo{width:52%}
+  .tagsgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .reel,.life,.two,.jars{grid-template-columns:minmax(0,1fr)}
+  .steps,.plat{grid-template-columns:minmax(0,1fr)}
+  .req{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .top nav{display:none}
+}
+@media (max-width:560px){
+  body{font-size:16px}
+  .tagsgrid,.wall{grid-template-columns:1fr}
+  .sh{flex-wrap:wrap}.sh .aside{margin-left:0;text-align:left;width:100%}
+  .plaque b{font-size:19px}.todo{display:none}
+  .window .logo{width:56%;left:42%}
+  .jar .price{font-size:38px}
+  .skullnote{grid-template-columns:62px 1fr}.skullnote img{width:62px}
+}
+@keyframes flick{0%,100%{opacity:1}45%{opacity:.82}55%{opacity:.95}}
+.flick{animation:flick 3.2s infinite}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.rise{animation:rise .7s both}
+.rise:nth-child(2){animation-delay:.12s}.rise:nth-child(3){animation-delay:.24s}.rise:nth-child(4){animation-delay:.36s}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+
+.rise{animation:none!important}
+/* Studio polish: night-blue foundations, lantern actions, readable pixel headings. */
+:root{--bark:#080f17;--bark2:#101c23;--bone:#f1e6c9;--parch2:#c5b991;--body:system-ui,-apple-system,'Segoe UI',sans-serif}
+body{background-color:var(--bark);background-image:radial-gradient(ellipse at 80% 0%,#19304366,transparent 35%),radial-gradient(ellipse at 0% 35%,#26432544,transparent 40%);line-height:1.65}
+body:before{display:none}
+a,button{-webkit-tap-highlight-color:transparent}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible,video:focus-visible{outline:3px solid var(--lantern);outline-offset:5px}
+.skip{position:fixed;left:16px;top:8px;z-index:100;background:var(--bone);color:var(--ink);padding:12px 18px;transform:translateY(-160%)}.skip:focus{transform:none}
+section,main{scroll-margin-top:92px}
+.wrap{max-width:1480px}
+.top{background:#080f17f5;border-bottom:1px solid #344336;box-shadow:none}
+.top .wrap{min-height:72px;height:auto;gap:16px;padding-top:10px;padding-bottom:10px}
+.top .mark{font-size:22px;white-space:nowrap}.top nav a{display:inline-flex;align-items:center;min-height:44px;font-size:10px;letter-spacing:.06em;padding:8px}
+.lang{margin-left:auto;flex:none}.lang button{min-height:44px;min-width:44px;padding:8px}
+.hero{padding-top:clamp(24px,4vw,64px)}
+.hero .wrap{grid-template-columns:minmax(0,1.45fr) minmax(340px,1fr);grid-template-areas:'win led' 'below below';gap:32px 48px;align-items:center}
+.window{border:1px solid #746044;outline:none;box-shadow:0 20px 70px #0006}
+.window img.art{aspect-ratio:1600/800;object-position:top}
+.window:after{box-shadow:inset 0 0 35px #0006}.window .logo{left:47%;top:4%;width:49%;z-index:1}
+.ledger{gap:20px;padding:0}.ledger h1{font-size:clamp(42px,4.2vw,64px);line-height:1.04;letter-spacing:-.015em}.ledger .lab{color:#b7cf8b;line-height:1.6;font-size:10px;letter-spacing:.08em}
+.pitch{font-size:clamp(16px,1.25vw,18px);max-width:44ch;line-height:1.65}
+.plaques{gap:12px}.plaque{padding:14px 16px;border:1px solid #decc96;box-shadow:0 3px 0 #000;min-height:74px}.plaque:before,.plaque:after{display:none}.plaque.green{background:var(--lantern);border-color:#ffc876}.plaque:hover{transform:translateY(-2px)}.plaque b{font-size:24px}.plaque small{font-size:9px;line-height:1.5;letter-spacing:.04em}.plaque .todo{display:none}
+.below{flex-direction:row;align-items:center;justify-content:space-between;padding:22px 0;border-top:1px solid #344336;border-bottom:1px solid #344336;gap:32px}.tags{max-width:650px;gap:10px}.tag{font-size:10px;letter-spacing:.03em;line-height:1.4}.skullnote{max-width:430px;grid-template-columns:64px 1fr}.skullnote img{width:64px}.bubble{font-size:17px}.flick{animation:none}
+.sh{border-bottom:1px solid #344336}.sh h2{font-size:clamp(32px,3.5vw,50px)}.sh .aside{font-size:10px;line-height:1.6;letter-spacing:.05em;max-width:34ch}.lab{line-height:1.5;letter-spacing:.06em}
+.reel{grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:30px}.screen{border:1px solid #746044;outline:none}.cap span{font-size:14px}.cap{align-items:flex-start;flex-direction:column;gap:2px}.cap b{font-size:24px}
+.step{border:1px solid #344936;box-shadow:0 5px 0 #0005}.step h3{font-size:30px}.step p{line-height:1.65}.step .margin{font-size:14px}.step .n{font-size:28px;top:-15px;padding:5px 10px}
+.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}.feature{border:1px solid #344936;background:#101c1d;overflow:hidden}.feature img{width:100%;aspect-ratio:3/1;object-fit:contain;background:#080f12;image-rendering:pixelated}.feature-copy{padding:24px 28px 28px}.feature h3{font-size:30px;margin:8px 0 10px;color:var(--lantern)}.feature p{margin:0;font-size:16px;color:#d3cdbb;max-width:55ch}.feature .lab{font-size:10px;color:#b7cf8b}
+.step img,.wall img,.cast img,.shelf img,img.px,.skullnote img,.top .mark img{image-rendering:pixelated}.panel{border-width:1px;padding:24px;box-shadow:none}.panel h3{font-size:28px}.cast{scrollbar-color:#7e9c55 #101c1d}.cast img{height:200px}.wall{grid-template-columns:1fr}.wall img{outline:none;border:1px solid #746044}
+.jar{border-width:1px;padding:30px;box-shadow:none}.jar h3{padding-right:100px}.jar .stamp{top:30px;right:25px;font-size:10px;transform:none}.jar li{font-size:15px;line-height:1.65}.jar li.no{color:#b9b397}.jar .price{margin:16px 0 24px}.jar .plaque{margin-top:24px}
+.pl{border-width:1px;padding:24px}.pl .st{position:static;display:inline-block;line-height:1.5;font-size:9px;margin-bottom:18px}.pl h3{font-size:28px}.pl p{font-size:15px}
+.req{gap:24px}.req b{font-size:24px;margin-top:4px}.note{font-size:16px}.facts td{overflow-wrap:anywhere}.dl a{min-height:44px;display:flex;align-items:center;font-size:10px;line-height:1.5}.todo{white-space:normal;line-height:1.5;font-size:9px}
+footer{background:#060c14;border-top:1px solid #344336}footer .banner{height:220px}footer .banner img{object-position:center 42%}footer .banner:after{background:linear-gradient(transparent,#060c14)}
+@media(min-width:1800px){.hero{padding-top:72px}.hero .wrap{gap:40px 56px}.ledger h1{font-size:66px}}
+@media(max-width:1100px){.top nav{display:none}.hero .wrap{grid-template-columns:minmax(0,1.2fr) minmax(300px,1fr);gap:26px}.ledger h1{font-size:44px}.below{align-items:flex-start}.steps{grid-template-columns:repeat(3,minmax(0,1fr))}.life,.jars,.two{grid-template-columns:repeat(2,minmax(0,1fr))}.plat{grid-template-columns:repeat(3,minmax(0,1fr))}.plaque b{font-size:22px}.reel{grid-template-columns:1.5fr 1fr}}
+@media(max-width:800px){.hero .wrap{grid-template-columns:1fr;grid-template-areas:'win' 'led' 'below';gap:26px}.window .logo{left:47%;width:49%}.ledger h1{font-size:clamp(42px,7vw,58px);max-width:17ch}.ledger .pitch{max-width:55ch}.below{flex-direction:column;gap:22px}.feature-grid,.steps,.life,.jars,.two,.plat,.reel{grid-template-columns:1fr}.sh .aside{max-width:none}.feature-copy{padding:22px}.steps{gap:36px}.step img{aspect-ratio:3/1}.step p{font-size:16px}.reel{gap:28px}.skullnote{max-width:none}.req{grid-template-columns:repeat(2,minmax(0,1fr))}.top .mark{font-size:19px}.top .wrap{gap:8px}.top .mark img{width:24px}.jar{padding:24px}.jar .stamp{top:26px;right:20px}.cast img{height:160px}.todo{display:inline-block}.plaque .todo{display:none}section{padding-top:64px}footer .in{padding-bottom:32px}.sh{gap:12px}.sh .aside{width:100%;text-align:left;margin-left:0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.rise{animation:none}}
+
+</style>
+</head>
+<body>
+<a class="skip" href="#top" data-pt="Pular para o conteúdo">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top"><img src="img/mug.png" alt="" width="28" height="28"><span>Witch Doctor's Hut</span></a>
+    <nav aria-label="Sections">
+      <a href="../" data-pt="Estúdio">&#8592; Studio</a>
+      <a href="#watch" data-pt="Vídeo">Watch</a>
+      <a href="#play" data-pt="Como joga">How it plays</a>
+      <a href="#hut" data-pt="A cabana">The hut</a>
+      <a href="#demo" data-pt="Demo">Demo</a>
+      <a href="#platforms" data-pt="Plataformas">Platforms</a>
+      <a href="#press" data-pt="Imprensa">Press</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language"><button type="button" data-l="en" aria-pressed="true">EN</button><button type="button" data-l="pt" aria-pressed="false">PT</button></div>
+  </div>
+</header>
+
+<main id="top" tabindex="-1">
+<div class="hero">
+  <div class="wrap">
+    <div class="window rise">
+      <img class="art" src="img/key_art.jpg" width="1600" height="900" data-alt-pt="Vosk, o troll azul, mexe o caldeirão enquanto Old Teeth observa na cabana." alt="Vosk the blue troll stirring a bubbling cauldron in his hut, Old Teeth the skull on the counter, a blue star over the swamp outside.">
+      <img class="logo" src="img/logo.png" width="1400" height="330" data-alt-pt="Witch Doctor's Hut" alt="Witch Doctor's Hut">
+    </div>
+    <div class="below">
+      <div class="tags" aria-label="Quick facts">
+        <span class="tag">Windows 10/11</span><span class="tag">US$ 3.99</span><span class="tag">EN · PT-BR · ES-LATAM</span><span class="tag" data-pt="Sem conta, sem internet">No account, no internet</span>
+      </div>
+      <div class="skullnote">
+        <img src="img/skull_sarcastic.png" data-alt-pt="Old Teeth, a caveira com uma vela na cabeça." alt="Old Teeth, a skull with a candle on his head" width="78" height="82">
+        <div class="bubble" data-pt="&quot;Quem deixou um troll meio morto entrar na minha cabana?&quot;<cite>Old Teeth, primeiro dia</cite>">"Who let a half-dead troll in my hut?"<cite>Old Teeth, day one</cite></div>
+      </div>
+    </div>
+    <div class="ledger rise">
+      <span class="lab" data-pt="Um jogo idle cozy-grim para Windows">A cozy-grim idle game for Windows</span>
+      <h1 data-pt="Você digita.<br><em>Ele prepara.</em>">You type.<br><em>He brews.</em></h1>
+      <p class="pitch" data-pt="Um troll ferido. Uma caveira sem filtro. Uma cabana na sua barra de tarefas. Digite para mexer o caldeirão, preparar poções e pagar o aluguel de Old Teeth.">A wounded troll. A skull with no filter. A hut on your taskbar. Type to stir the cauldron, brew potions and pay Old Teeth’s rent.</p>
+      <div class="plaques">
+        <a class="plaque green" href="#TODO-steam-wishlist-url" id="wl">
+          <svg class="ic" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="#1c140a" d="M7 1h2v3h3v2h3v2h-3v2h2v3h-3v-1h-2v3H7v-3H5v1H2v-3h2V8H1V6h3V4h3z"/><path fill="#f2e08a" d="M7 3h2v3h3v2H9v3H7V8H4V6h3z"/></svg>
+          <span><b data-pt="Lista de desejos na Steam">Wishlist on Steam</b><small data-pt="Em breve na Steam">Coming soon on Steam</small></span>
+          <span class="todo">TODO: Steam URL</span>
+        </a>
+        <a class="plaque" href="#TODO-itch-demo-url" id="demo-btn">
+          <svg class="ic" viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="#1c140a" d="M3 2h10v2h2v3h-2v2H12v3h-2v2H6v-2H4V9H3V7H1V4h2z"/><path fill="#9bd13c" d="M4 4h8v3H4zM5 8h6v3H5z"/></svg>
+          <span><b data-pt="Jogue a demo no itch">Play the demo on itch</b><small data-pt="Grátis. Windows.">Free. Windows.</small></span>
+          <span class="todo">TODO: itch URL</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="watch">
+  <div class="wrap">
+    <div class="sh"><span class="no">01</span><h2 data-pt="Veja o jogo">See it move</h2><span class="aside" data-pt="Gravado do jogo de verdade">Recorded from the real game</span></div>
+    <div class="reel">
+      <div>
+        <div class="screen"><video aria-label="Gameplay trailer" controls preload="none" playsinline poster="img/poster_short.jpg"><source src="video/brew_short_v2_16x9.mp4" type="video/mp4"></video></div>
+        <div class="cap"><b data-pt="Digite. Mexa. Prepare.">Type. Stir. Brew.</b><span data-pt="34 segundos do jogo rodando.">34 seconds of the game running.</span></div>
+      </div>
+      <div class="small">
+        <div class="screen"><video aria-label="Game introduction" controls preload="none" playsinline poster="img/poster_intro.jpg"><source src="video/intro_v3_720p.mp4" type="video/mp4"></video></div>
+        <div class="cap"><b data-pt="A chegada">The landing</b><span data-pt="A intro: flechas, bala de canhão em chamas, uma placa na porta.">The intro: fire arrows, a flaming cannonball, a sign on the door.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="play">
+  <div class="wrap">
+    <div class="sh"><span class="no">02</span><h2 data-pt="Como joga">How it plays</h2><span class="aside" data-pt="Você trabalha. Ele prepara.">You work. He brews.</span></div>
+    <div class="steps">
+      <article class="step"><span class="n">1</span><img src="img/shot_1.jpg" width="1440" height="480" data-alt-pt="Vosk prepara poções no caldeirão dentro da cabana." alt="The hut interior with the troll at a calm green cauldron" loading="lazy"><h3 data-pt="Digite">Type</h3><p data-pt="Cada tecla, em qualquer programa, mexe o caldeirão. O jogo conta o ritmo, nunca o que você escreve.">Every key you press, in any program, stirs the cauldron. The game counts the rhythm, never what you write.</p><div class="margin" data-pt="Digite como chuva, não como granizo.">Type like rain, not like hail.</div></article>
+      <article class="step"><span class="n">2</span><img src="img/shot_2.jpg" width="1440" height="480" data-alt-pt="Vosk mexe o caldeirão brilhante." alt="The cauldron at the top stage, glowing white, with Vosk stirring" loading="lazy"><h3 data-pt="Esquente">Heat it</h3><p data-pt="Em ritmo firme, a panela sobe de SIMMER até ANCESTRAL: faíscas, fumaça colorida, fogos pela tela toda.">In a steady rhythm the pot climbs from SIMMER to ANCESTRAL: sparks, coloured smoke, fireworks across your whole screen.</p><div class="margin" data-pt="A panela cuspiu. Diga obrigado. Ninguém vai dizer.">The pot spat. Say thank you. Nobody will.</div></article>
+      <article class="step"><span class="n">3</span><img src="img/shot_3.jpg" width="1440" height="480" data-alt-pt="Uma poção no balcão ao lado de Old Teeth." alt="A potion on the counter with the skull talking" loading="lazy"><h3 data-pt="Venda e sobreviva">Sell and survive</h3><p data-pt="Digite como um maníaco e ela explode. O Vosk cai de cara. Vender poções paga o aluguel da caveira.">Type like a maniac and it blows. Vosk goes down face first. Selling potions pays the skull's rent.</p><div class="margin" data-pt="Você parece meio morto. Eu respeito isso.">You look half dead. I respect that.</div></article>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <div class="sh"><span class="no">03</span><h2 data-pt="O que tem na prateleira">What is on the shelf</h2><span class="aside" data-pt="Penduradas pela caveira">Hung up by the skull</span></div>
+    <div class="feature-grid"><article class="feature"><img src="img/shot_3.jpg" data-alt-pt="Uma poção no balcão ao lado de Old Teeth." alt="Potion on the counter beside Old Teeth" loading="lazy"><div class="feature-copy"><span class="lab" data-pt="Voz">Voice</span><h3 data-pt="Uma caveira cheia de opiniões">A skull with opinions</h3><p data-pt="Old Teeth cuida das contas, recebe as moedas e tem uma frase seca e grosseira para cada humor.">Old Teeth keeps the books, takes the coins and has a dry, rude line for every mood.</p></div></article>
+<article class="feature"><img src="img/shot_2.jpg" data-alt-pt="Vosk mexe o caldeirão brilhante." alt="Vosk stirring a glowing cauldron" loading="lazy"><div class="feature-copy"><span class="lab" data-pt="Ritmo e risco">Rhythm & risk</span><h3 data-pt="Encontre seu ritmo">Find your brewing rhythm</h3><p data-pt="Seis estágios de fervura. Faíscas, fumaça e fogos. Exagere e a panela transborda. Vosk levanta. Ele está acostumado.">Six stages of boil. Sparks, smoke and fireworks. Push too hard and the pot boils over. Vosk gets up. He is used to it.</p></div></article>
+<article class="feature"><img src="img/full_cast.png" data-alt-pt="Visitantes do jogo, incluindo criaturas, viajantes e seres do pântano." alt="Visitors from the game" loading="lazy"><div class="feature-copy"><span class="lab" data-pt="Clientes e receitas">Customers & craft</span><h3 data-pt="Poções estranhas. Visitas ainda mais.">Strange brews. Stranger company.</h3><p data-pt="Mais de 40 tipos de visitantes e dezenas de receitas. Colete ingredientes, prepare poções nojentas e deixe o Vosk se arrepender de provar.">Over 40 kinds of visitor and dozens of recipes. Collect ingredients, brew gross potions and let Vosk regret the taste test.</p></div></article>
+<article class="feature"><img src="img/shot_1.jpg" data-alt-pt="Vosk prepara poções no caldeirão dentro da cabana." alt="Vosk brewing inside the hut" loading="lazy"><div class="feature-copy"><span class="lab" data-pt="Seu companheiro de desktop">Your desktop companion</span><h3 data-pt="Uma cabana. Um longo caminho de cura.">A little hut. A long way to heal.</h3><p data-pt="De ataduras a xamã completo. Equipe o Vosk, desperte as runas azuis e prepare poções na barra de tarefas. Transparente, não bloqueia o mouse e se esconde durante apps em tela cheia.">From bandages to a full shaman. Gear up, wake the blue runes and keep brewing above your taskbar. Transparent, click-through, hidden during fullscreen apps.</p></div></article></div>
+  </div>
+</section>
+
+<section id="hut">
+  <div class="wrap">
+    <div class="sh"><span class="no">04</span><h2 data-pt="A vida na cabana">Life in the hut</h2><span class="aside" data-pt="Arte do jogo, sem retoque">Game art, untouched</span></div>
+    <div class="life">
+      <div class="panel wide"><h3 data-pt="Quem bate na porta">Who knocks</h3><p data-pt="Os visitantes andam, pulam, voam e chegam montados. Arraste para o lado.">Visitors walk, hop, fly and ride in. Scroll sideways.</p><div class="cast" tabindex="0" role="region" aria-label="Game visitors"><img src="img/full_cast.png" width="2638" height="300" data-alt-pt="Visitantes do jogo, incluindo criaturas, viajantes e seres do pântano." alt="Fourteen of the game's visitors: a skeleton, a crab captain, a baby dragon, a lady frog with a parasol, a troll elder, a moth priestess, an orc, an elf, a moss golem, a dwarf, a wraith, a stilt gnome and a warlock." loading="lazy"></div></div>
+      <div class="panel"><h3 data-pt="Prateleira de poções">Potion shelf</h3><p data-pt="Um Thunder Burp, um Witch Special, um Night Drop. Cada poção tem frase e raridade em estrelas.">A Thunder Burp, a Witch Special, a Night Drop. Each potion has a line and a star rarity.</p><div class="shelf"><img src="img/potions.png" width="672" height="224" data-alt-pt="Prateleira de poções e amuletos em pixel art." alt="Twelve hand-painted pixel potions and charms." loading="lazy"></div></div>
+      <div class="panel"><h3 data-pt="Prateleira de ingredientes">Ingredient shelf</h3><p data-pt="Nada chega sozinho: você coleta, escolhe, mistura. Poucos itens na mão, cada um com peso.">Nothing arrives by itself: you collect, choose, mix. Few items in hand, each one counts.</p><div class="shelf"><img src="img/ingredients.png" width="672" height="224" data-alt-pt="Ingredientes do jogo, incluindo cogumelo, pimenta fantasma e orvalho da lua." alt="Twelve ingredients: a mushroom, bog snot, a toe, a ghost pepper, moon dew, an owl bloom and more." loading="lazy"></div></div>
+      <div class="panel"><h3 data-pt="Por fora">Outside</h3><p data-pt="A cabana por fora, com porta que abre e uma placa que mente.">The hut from outside, with a door that opens and a sign that lies.</p><div class="wall"><img src="img/hut_outside.jpg" width="1440" height="480" data-alt-pt="A cabana por fora, com telhado de palha e janelas iluminadas." alt="The hut seen from outside, thatched roof, lit windows" loading="lazy"><img src="img/hut_inside.jpg" width="1440" height="480" data-alt-pt="Interior da cabana com uma janela redonda para o pântano." alt="The hut interior with a round window onto the swamp" loading="lazy"></div></div>
+      <div class="panel"><h3 data-pt="As runas azuis">The blue runes</h3><p data-pt="Doze postes entalhados acordam um a um depois que o Vosk vira Rune-Marked. Cada um dá um pequeno bônus.">Twelve carved posts wake one by one after Vosk becomes Rune-Marked. Each gives a small bonus.</p><div class="shelf" style="background:#0a0f0c;padding:14px"><img src="img/runes.png" width="1812" height="192" data-alt-pt="Doze runas azuis brilhantes." alt="Twelve glowing blue runes." loading="lazy"></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="demo">
+  <div class="wrap">
+    <div class="sh"><span class="no">05</span><h2 data-pt="Demo e jogo completo">Demo and full game</h2><span class="aside" data-pt="O save da demo continua no jogo completo">Demo saves continue in the full game</span></div>
+    <div class="jars">
+      <article class="jar"><span class="stamp" data-pt="GRÁTIS">FREE</span>
+        <h3 data-pt="Demo">Demo</h3><div class="price">US$ 0</div>
+        <ul>
+          <li data-pt="A intro inteira e o tutorial da caveira">The whole intro and the skull's tutorial</li>
+          <li data-pt="As primeiras horas: de Trespasser até Apprentice">The first hours: Trespasser up to Apprentice</li>
+          <li data-pt="O jogo base inteiro: digitar, mexer, ferver, estourar">The whole core loop: type, stir, boil, boom</li>
+          <li data-pt="9 visitantes, 2 caldeirões, 2 peças de equipamento">9 visitors, 2 cauldrons, 2 pieces of gear</li>
+          <li data-pt="Inglês, português e espanhol">English, Portuguese and Spanish</li>
+          <li class="no" data-pt="Sem runas, sem as patentes finais, sem o resto do elenco">No runes, no late ranks, no rest of the cast</li>
+        </ul>
+        <a class="plaque" href="#TODO-itch-demo-url"><b data-pt="Jogue a demo grátis">Play the free demo</b></a>
+      </article>
+      <article class="jar full"><span class="stamp" data-pt="US$ 3,99">US$ 3.99</span>
+        <h3 data-pt="Jogo completo">Full game</h3><div class="price">US$ 3.99</div>
+        <ul>
+          <li data-pt="Oito promoções, de Trespasser a Witch Doctor: cerca de 18 horas de jogo">Eight promotions, Trespasser to Witch Doctor: about 18 hours of play</li>
+          <li data-pt="Mais de 40 visitantes e dezenas de receitas">Over 40 visitors and dozens of recipes</li>
+          <li data-pt="Cinco caldeirões, sete espaços de equipamento, doze runas">Five cauldrons, seven gear slots, twelve runes</li>
+          <li data-pt="As 40 Lições do Troll e as 4 faixas de música">All 40 Troll Teachings and all 4 music tracks</li>
+          <li data-pt="Depois do fim o jogo continua: coleção, lendárias, cabana">The game keeps going after the ending: collection, legendaries, the hut</li>
+          <li data-pt="Sem conta, sem internet, sem microtransações">No account, no internet, no microtransactions</li>
+        </ul>
+        <a class="plaque green" href="#TODO-steam-wishlist-url"><b data-pt="Lista de desejos na Steam">Wishlist on Steam</b></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="platforms">
+  <div class="wrap">
+    <div class="sh"><span class="no">06</span><h2 data-pt="Plataformas">Platforms</h2><span class="aside" data-pt="O que existe hoje e o que é plano">What exists today and what is only a plan</span></div>
+    <div class="plat">
+      <article class="pl"><span class="st live" data-pt="EM DESENVOLVIMENTO">IN DEVELOPMENT</span><h3>Windows</h3><p data-pt="O jogo principal: uma janela transparente em cima da barra de tarefas. Conta suas teclas em qualquer programa. Windows 10 ou 11, 64 bits.">The main game: a transparent window above the taskbar. Counts your keys in any program. Windows 10 or 11, 64-bit.</p></article>
+      <article class="pl"><span class="st test" data-pt="EM TESTE">TESTING</span><h3 data-pt="Celular (navegador)">Phone (browser)</h3><p data-pt="Uma versão no navegador, com toque para mexer. Ainda não está nas lojas de apps e não prometemos que vai estar.">A browser version where you tap to stir. Not in the app stores, and we do not promise it will be.</p></article>
+      <article class="pl"><span class="st plan" data-pt="PLANEJADO">PLANNED</span><h3 data-pt="Cabana em tela cheia">Full-screen hut</h3><p data-pt="Uma atualização grátis depois do lançamento: a cabana inteira numa janela grande. Sem data.">A free update after launch: the whole hut in a big window. No date.</p></article>
+    </div>
+    <div class="req">
+      <div><span class="lab" data-pt="Sistema">System</span><b>Windows 10 / 11</b></div>
+      <div><span class="lab">RAM</span><b>2 GB</b></div>
+      <div><span class="lab" data-pt="Disco">Disk</span><b>400 MB</b></div>
+      <div><span class="lab" data-pt="Rede">Network</span><b data-pt="Não precisa">Not needed</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="honest">
+  <div class="wrap two">
+    <div>
+      <div class="sh"><span class="no">07</span><h2 data-pt="O que a caveira vê">What the skull can see</h2></div>
+      <div class="note">
+        <p data-pt="Old Teeth não tem olhos, e o jogo também não tem memória do que você escreve. Ele percebe que você está digitando e com que velocidade. Nunca o quê. Nada sai do seu PC. Saia quando quiser pela bandeja.">Old Teeth has no eyes, and neither does the game's memory. It notices that you are typing and how fast. Never what. Nothing leaves your PC. Quit any time from the tray icon.</p>
+        <p data-pt="O arquivo ainda não é assinado digitalmente. O Windows pode avisar na primeira vez: Mais informações, Executar assim mesmo.">The file is not code-signed yet. Windows may warn you the first time: More info, Run anyway.</p>
+      </div>
+    </div>
+    <div>
+      <div class="sh"><span class="no">08</span><h2 data-pt="Sem enrolação">The honest bits</h2></div>
+      <div class="note">
+        <p data-pt="Arte, algumas músicas e as vozes foram feitas com ferramentas de IA, depois cortadas, alinhadas e editadas à mão. Os diálogos foram escritos com ajuda de IA e editados pelo desenvolvedor.">Art, some music and the voices were made with AI tools, then cut, aligned and edited by hand. Dialogue was written with AI help and edited by the developer.</p>
+        <p data-pt="Um estúdio pequeno. Bellatrix Forge Studios.">One small studio. Bellatrix Forge Studios.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="press">
+  <div class="wrap two">
+    <div>
+      <div class="sh"><span class="no">09</span><h2 data-pt="Imprensa">Press</h2><span class="aside" data-pt="Ficha rápida">Fact sheet</span></div>
+      <table class="facts">
+        <tr><td data-pt="Jogo">Game</td><td>Witch Doctor's Hut</td></tr>
+        <tr><td data-pt="Estúdio">Studio</td><td>Bellatrix Forge Studios</td></tr>
+        <tr><td data-pt="Plataforma">Platform</td><td data-pt="Windows 10/11 (taskbar). Navegador de celular em teste.">Windows 10/11 (taskbar). Phone browser in testing.</td></tr>
+        <tr><td data-pt="Preço">Price</td><td data-pt="US$ 3,99. Demo grátis.">US$ 3.99. Free demo.</td></tr>
+        <tr><td data-pt="Lançamento">Release</td><td data-pt="Em breve. Sem data fixa ainda.">Coming soon. No fixed date yet.</td></tr>
+        <tr><td data-pt="Idiomas">Languages</td><td data-pt="Inglês, português do Brasil, espanhol latino. Vozes em inglês.">English, Brazilian Portuguese, Latin American Spanish. Voices in English.</td></tr>
+        <tr><td data-pt="Contato">Contact</td><td><span class="todo" style="margin:0">TODO: press e-mail</span></td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="sh"><span class="no">10</span><h2 data-pt="Material de imprensa">Press kit</h2><span class="aside"><span class="todo">TODO: zip + press page</span></span></div>
+      <p data-pt="Imagens do jogo, arte-chave e logo, no tamanho do site. O pacote completo em resolução total ainda será montado." style="color:#cfc7a8;margin:0">Game images, key art and logo at web size. The full-resolution package is still to be assembled.</p>
+      <div class="dl">
+        <a href="img/key_art.jpg" download data-pt="Arte-chave">Key art</a>
+        <a href="img/logo.png" download>Logo</a>
+        <a href="img/shot_1.jpg" download data-pt="Captura 1">Screenshot 1</a>
+        <a href="img/shot_2.jpg" download data-pt="Captura 2">Screenshot 2</a>
+        <a href="img/shot_3.jpg" download data-pt="Captura 3">Screenshot 3</a>
+        <a href="img/cover_vertical.jpg" download data-pt="Capa vertical">Vertical cover</a>
+        <a href="deck.html" data-pt="Apresentação (slides)">Presentation deck</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="banner"><img src="img/studio.jpg" width="1200" height="675" data-alt-pt="Bellatrix Forge Studios: uma estrela azul sobre o pântano à noite." alt="Bellatrix Forge Studios: a bright blue star over a dark swamp at night" loading="lazy"></div>
+  <div class="wrap in">
+    <div><b>Bellatrix Forge Studios</b><p data-pt="Um estúdio pequeno sob uma estrela azul.">One small studio under a blue star.</p></div>
+    <p>&copy; 2026 Bellatrix Forge Studios. Witch Doctor's Hut.</p>
+  </div>
+</footer>
+
+<p id="link-status" class="link-status" role="status" aria-live="polite"></p>
+<style>.link-status{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:80;background:var(--bone);color:var(--ink);box-shadow:0 5px 24px #0008;max-width:calc(100% - 32px);width:max-content;margin:0}.link-status:not(:empty){padding:14px 20px;border:2px solid var(--lantern)}</style>
+<script>
+(function(){
+  /* PT toggle: every element with data-pt keeps its English in data-en and swaps innerHTML. */
+  var els=[].slice.call(document.querySelectorAll('[data-pt]'));
+  els.forEach(function(e){e.setAttribute('data-en',e.innerHTML)});
+  var altEls=[].slice.call(document.querySelectorAll('[data-alt-pt]'));altEls.forEach(function(e){e.dataset.altEn=e.alt});
+  function set(l){
+    altEls.forEach(function(e){e.alt=l==='pt'?e.dataset.altPt:e.dataset.altEn});
+    document.querySelector('nav').setAttribute('aria-label',l==='pt'?'Seções':'Sections');
+    document.querySelector('.lang').setAttribute('aria-label',l==='pt'?'Idioma':'Language');
+    document.querySelector('.cast').setAttribute('aria-label',l==='pt'?'Visitantes do jogo':'Game visitors');
+    var videos=document.querySelectorAll('video');videos[0].setAttribute('aria-label',l==='pt'?'Trailer do jogo':'Gameplay trailer');videos[1].setAttribute('aria-label',l==='pt'?'Introdução do jogo':'Game introduction');
+    document.getElementById('link-status').textContent='';
+    els.forEach(function(e){e.innerHTML=l==='pt'?e.getAttribute('data-pt'):e.getAttribute('data-en')});
+    document.documentElement.lang=l==='pt'?'pt-BR':'en';
+    [].forEach.call(document.querySelectorAll('.lang button'),function(b){b.setAttribute('aria-pressed',b.dataset.l===l)});
+    try{localStorage.setItem('wdh-site-lang',l)}catch(e){}
+  }
+  [].forEach.call(document.querySelectorAll('.lang button'),function(b){b.addEventListener('click',function(){set(b.dataset.l)})});
+  var s='en';try{s=localStorage.getItem('wdh-site-lang')||((navigator.language||'').slice(0,2)==='pt'?'pt':'en')}catch(e){}
+  if(s==='pt')set('pt');
+  /* placeholder links do not navigate while they are still TODO */
+  [].forEach.call(document.querySelectorAll('a[href^="#TODO"]'),function(a){a.addEventListener('click',function(e){e.preventDefault();clearTimeout(window.wdhNoticeTimer);window.wdhNoticeTimer=setTimeout(function(){document.getElementById('link-status').textContent=''},6000);var pt=document.documentElement.lang==='pt-BR';document.getElementById('link-status').textContent=pt?'Link em breve. A página da loja ainda não está disponível.':'Link coming soon. The store page is not available yet.'})});
+})();
+</script>
+</body>
+</html>

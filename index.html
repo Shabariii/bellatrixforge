@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bellatrix Forge Studios</title>
+<meta name="description" content="Bellatrix Forge Studios is an independent game studio from Brazil. Games forged under a blue star: BELLATRIX, Witch Doctor's Hut, and more to come.">
+<meta property="og:title" content="Bellatrix Forge Studios">
+<meta property="og:description" content="Games forged under a blue star.">
+<meta property="og:image" content="img/studio_sky.webp">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 4 58 42 96 50 58 58 50 96 42 58 4 50 42 42Z' fill='%23e7b85a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="forge.css">
+</head>
+<body>
+<nav class="top">
+  <a class="mark" href="./"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 58 42 96 50 58 58 50 96 42 58 4 50 42 42Z"/></svg>Bellatrix Forge</a>
+  <div><a href="#games">Games</a><a href="#forge">The Forge</a><a href="#support">Support</a></div>
+</nav>
+
+<header class="hero">
+  <div class="sky" style="background-image:url(img/space.webp)"></div>
+  <canvas id="sparks" aria-hidden="true"></canvas>
+  <img class="logo" src="img/studio_logo.webp" alt="Bellatrix Forge Studios: an anvil struck by a blue star" width="900" height="888">
+  <p class="tag">Games forged under a blue star.</p>
+  <a class="down" href="#games" aria-label="See our games">&#8595;</a>
+</header>
+
+<main>
+<section id="games">
+  <div class="rule"><span>Our Games</span></div>
+  <div class="plaques">
+    <a class="plaque" href="bellatrix/">
+      <div class="art" style="background-image:url(img/bx_02_boss_the_bastion.webp)"></div>
+      <div class="rivets"></div>
+      <div class="body">
+        <span class="status live">Demo soon &middot; Steam coming</span>
+        <h2>BELLATRIX</h2>
+        <p>A survivors-like space shooter. The blue giant of Orion is changing, the fleet has turned on us, and one pilot launches with ECHO in her ear.</p>
+        <span class="go">Enter the Wake &#8594;</span>
+      </div>
+    </a>
+    <a class="plaque" href="witch-doctors-hut/">
+      <div class="art" style="background-image:url(img/wdh_key.webp)"></div>
+      <div class="rivets"></div>
+      <div class="body">
+        <span class="status live">Free on itch &middot; soon</span>
+        <h2>WITCH DOCTOR'S HUT</h2>
+        <p>A blue troll brews gross potions on your taskbar. A skull roasts him. You type, the pot stirs, the troll regrets everything.</p>
+        <span class="go">Visit the hut &#8594;</span>
+      </div>
+    </a>
+    <div class="plaque ingot" aria-label="Next game, to be confirmed">
+      <div class="glow"></div>
+      <div class="rivets"></div>
+      <div class="body">
+        <span class="status">Still on the anvil</span>
+        <h2>To Be Confirmed</h2>
+        <p>The next one is cooling. We do not show half-forged steel.</p>
+        <span class="stamp">TBC</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="forge" class="forge">
+  <div class="rule"><span>The Forge</span></div>
+  <div class="two">
+    <p class="lede">Bellatrix is the warrior star on Orion's shoulder, the blue giant that names our first game and our studio.</p>
+    <div>
+      <p>We are a small independent studio from Brazil. We make games with a voice of their own: a pilot and her guardian under a dying star, a troll and a skull arguing in a swamp hut.</p>
+      <p>Every game is hand-directed, tested by bots and by people, and shipped only when it feels right.</p>
+    </div>
+  </div>
+</section>
+
+<section id="support" class="support">
+  <div class="rule"><span>Feed the Fire</span></div>
+  <p class="lede center">A crowdfunding page is coming, so players can help us keep the forge lit.</p>
+  <p class="center small">Until then, the best help is free: wishlist, play the demos, and tell a friend.</p>
+</section>
+</main>
+
+<footer>
+  <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 58 42 96 50 58 58 50 96 42 58 4 50 42 42Z"/></svg>
+  <p>&copy; 2026 Bellatrix Forge Studios &middot; Made in Brazil</p>
+</footer>
+
+<script>
+// Sparks rising from the anvil: one canvas, few particles, paused when hidden or reduced motion.
+(() => {
+  const c = document.getElementById('sparks'), x = c.getContext('2d');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let w, h, p = [];
+  const size = () => { w = c.width = c.offsetWidth; h = c.height = c.offsetHeight; };
+  addEventListener('resize', size); size();
+  const spawn = () => ({ x: w / 2 + (Math.random() - .5) * w * .18, y: h * .52, vx: (Math.random() - .5) * 1.6,
+    vy: -1 - Math.random() * 2.4, life: 1, hue: Math.random() < .25 ? 205 : 32 });
+  (function tick() {
+    if (!document.hidden) {
+      x.clearRect(0, 0, w, h);
+      if (p.length < 90) p.push(spawn());
+      p = p.filter(s => (s.life -= .008) > 0);
+      for (const s of p) {
+        s.x += s.vx; s.y += s.vy; s.vy += .012;
+        x.fillStyle = `hsla(${s.hue},95%,${s.hue === 205 ? 70 : 60}%,${s.life})`;
+        x.fillRect(s.x, s.y, 2, 2);
+      }
+    }
+    requestAnimationFrame(tick);
+  })();
+})();
+</script>
+</body>
+</html>
