@@ -32,11 +32,11 @@ img { display:block; max-width:100%; }
 .lines { position:absolute; left:0; right:0; bottom:9vh; height:5em; pointer-events:none; }
 .lines p { position:absolute; left:50%; bottom:0; width:min(1100px,92vw); transform:translateX(-50%); margin:0; opacity:0; text-align:center;
   font:500 clamp(22px,2.7vw,40px)/1.3 "Cormorant Garamond", serif; font-style:italic; color:var(--gold-hi); text-shadow:0 2px 24px #000; }
-.endlogo { position:absolute; left:50%; top:6vh; height:min(64vh,900px); transform:translateX(-50%); opacity:0; pointer-events:none;
+.endlogo { position:absolute; opacity:0; pointer-events:none;
   filter:drop-shadow(0 0 22px #6cc0ff66) drop-shadow(0 0 60px #6cc0ff33); }
-.endlogo.on { opacity:1; transition:opacity 1.2s; animation:pulse 3.4s ease-in-out infinite; }
+.endlogo.on { opacity:1; transition:opacity .9s; animation:pulse 3.4s ease-in-out infinite; }
 @keyframes pulse { 50% { filter:drop-shadow(0 0 34px #6cc0ffaa) drop-shadow(0 0 110px #6cc0ff55); } }
-.film video.dim { opacity:0; transition:opacity 1.2s; }
+.film video.dim { opacity:0; transition:opacity .9s; }
 #top .lines { bottom:8vh; }
 #top .lines p { font-size:clamp(18px,1.9vw,30px); }
 .hint { position:absolute; bottom:26px; left:50%; transform:translateX(-50%); font:600 11px Cinzel, serif; letter-spacing:.4em; color:var(--gold); animation:breathe 2.6s ease-in-out infinite; }
@@ -46,6 +46,8 @@ img { display:block; max-width:100%; }
 .oath ol { list-style:none; margin:0; padding:0; text-align:center; }
 .oath li { font:800 clamp(24px,4.2vw,72px)/1.12 Cinzel, serif; margin:.18em 0; }
 .oath .w { color:#2a2620; }
+.oath .w.hot { animation:hot-word 1.6s ease-out forwards; }
+@keyframes hot-word { 0% { color:#fff; text-shadow:0 0 40px #fff, 0 0 90px #ff3b0f; } 100% { color:#ff5a1f; text-shadow:0 0 18px #ff3b0f, 0 0 60px #b3120088; } }
 .oath .sign { margin-top:6vh; text-align:center; font:500 clamp(18px,1.8vw,26px) "Cormorant Garamond", serif; font-style:italic; color:var(--gold); letter-spacing:.06em; opacity:0; }
 
 .chapter { padding:14vh clamp(16px,6vw,96px) 8vh; max-width:1700px; margin:auto; }
@@ -104,6 +106,8 @@ footer nav a { margin:0 12px; font:600 12px Cinzel, serif; letter-spacing:.25em;
 @media (prefers-reduced-motion:reduce) { .reveal { opacity:1; transform:none; } .oath .w { color:var(--gold-hi); } .oath .sign { opacity:1; } }
 </style>
 <style>
+html { background:var(--night); } body.sky { background:transparent; }
+#stars { position:fixed; inset:0; width:100%; height:100%; z-index:-1; pointer-events:none; }
 .page-sec { padding:12vh clamp(16px,6vw,96px); max-width:1760px; margin:auto; }
 .page-sec h2.big { font:900 clamp(36px,5.4vw,92px)/1 "Cinzel Decorative", serif; margin:.3em 0 .5em; }
 .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:clamp(18px,2.4vw,40px); counter-reset:s; }
@@ -140,7 +144,8 @@ kbd { font:600 13px "IBM Plex Mono", monospace; padding:3px 9px; border:1px soli
 .hero-art .btns { justify-content:center; }
 </style>
 </head>
-<body>
+<body class="sky">
+<canvas id="stars" aria-hidden="true"></canvas>
 <div class="progress"></div>
 <canvas id="embers" aria-hidden="true"></canvas>
 <header class="bar">
@@ -229,15 +234,22 @@ function filmChapter(sec) {
   const v = sec.querySelector('video'), lines = gsap.utils.toArray(sec.querySelectorAll('.lines p')), hint = sec.querySelector('.hint');
   const tl = gsap.timeline({ paused: true });
   lines.forEach((p, i) => {
-    tl.to(p, { opacity: 1, y: 0, duration: .8 }, i * 3.2 + 1.2);
-    if (i < lines.length - 1) tl.to(p, { opacity: 0, y: -14, duration: .6 }, i * 3.2 + 3.6);
+    tl.to(p, { opacity: 1, y: 0, duration: .8 }, i * 3.2 + .4);
+    if (i < lines.length - 1) tl.to(p, { opacity: 0, y: -14, duration: .6 }, i * 3.2 + 2.8);
   });
-  if (hint) { gsap.set(hint, { opacity: 0 }); tl.to(hint, { opacity: .8, duration: .6 }, 2); }
+  if (hint) { gsap.set(hint, { opacity: 0 }); tl.to(hint, { opacity: .8, duration: .6 }, .4); }
+  v.addEventListener('ended', () => { tl.play(); if (end) { v.classList.add('dim'); end.classList.add('on'); } });
   const end = sec.querySelector('.endlogo');
-  if (end) v.addEventListener('ended', () => { v.classList.add('dim'); end.classList.add('on'); });
+  if (end) {
+    // map the measured box from the 1280x720 frame through object-fit:cover onto the screen
+    const place = () => { const W = sec.clientWidth, H = sec.clientHeight, s = Math.max(W / 1280, H / 720), ox = (W - 1280 * s) / 2, oy = (H - 720 * s) / 2, k = 342 / 1003;
+      Object.assign(end.style, { left: ox + 468 * s + 'px', top: oy + (115 - 7 * k) * s + 'px', width: 342 * s + 'px' }); };
+    addEventListener('resize', place); place();
+  }
+  ScrollTrigger.create({ trigger: sec, start: 'top top', end: () => '+=' + innerHeight, pin: true });
   let played = false;
   new IntersectionObserver(([e]) => {
-    if (e.isIntersecting && !played) { played = true; v.currentTime = 0; v.play().catch(() => {}); tl.play(); }
+    if (e.isIntersecting && !played) { played = true; v.currentTime = 0; v.play().catch(() => { tl.play(); }); }
   }, { threshold: .6 }).observe(sec);
 }
 
@@ -256,8 +268,12 @@ if (track) gsap.to(track, { x: () => -(track.scrollWidth - innerWidth), ease: 'n
   const size = () => { w = c.width = innerWidth; h = c.height = innerHeight; };
   addEventListener('resize', size); size();
   // a hit of fire: a burst of sparks and ash from one point
-  window.burst = (bx, by) => { for (let i = 0; i < 220; i++) { const a = Math.random() * 6.28, v = 1 + Math.random() * 7;
-    e.push({ x: bx, y: by, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 2.5, life: 1, big: Math.random() < .3 }); } };
+  window.burst = (bx, by) => {
+    for (let i = 0; i < 420; i++) { const a = Math.random() * 6.28, v = 1 + Math.random() * 9;
+      e.push({ x: bx + (Math.random() - .5) * 160, y: by, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 3.5, life: 1, big: Math.random() < .25, red: Math.random() < .55 }); }
+    // tongues of flame climbing from the word
+    for (let i = 0; i < 160; i++) e.push({ x: bx + (Math.random() - .5) * 220, y: by + 10, vx: (Math.random() - .5) * .8, vy: -(3 + Math.random() * 5), life: 1, big: false, red: true, flame: true });
+  };
   (function tick() {
     requestAnimationFrame(tick);
     if (document.hidden) return;
@@ -267,14 +283,42 @@ if (track) gsap.to(track, { x: () => -(track.scrollWidth - innerWidth), ease: 'n
     for (const p of e) {
       p.x += p.vx + Math.sin(p.y / 60) * .25; p.y += p.vy;
       if (p.big !== undefined) { p.vx *= .97; p.vy = p.vy * .97 - .03; }
-      x.fillStyle = p.big ? `rgba(160,150,140,${p.life * .6})` : `rgba(255,${120 + p.life * 90 | 0},40,${p.life * .9})`;
-      const s = p.big ? 3 : 2; x.fillRect(p.x, p.y, s, s);
+      x.fillStyle = p.big ? `rgba(160,150,140,${p.life * .6})` : p.red ? `rgba(255,${40 + p.life * 120 | 0},${p.life * 30 | 0},${p.life})` : `rgba(255,${120 + p.life * 90 | 0},40,${p.life * .9})`;
+      const s = p.flame ? 3 + p.life * 5 : p.big ? 3 : p.red ? 3 : 2; x.fillRect(p.x, p.y, s, s);
     }
   })();
 })();
 
 if (!reduce) gsap.utils.toArray('.reveal').forEach(el => gsap.to(el, { opacity: 1, y: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 88%' } }));
 document.querySelectorAll('.film').forEach(filmChapter);
+
+// A living sky behind the page: twinkling stars that drift with the scroll, and now and then a comet.
+(() => {
+  const c = document.getElementById('stars'); if (!c) return;
+  const x = c.getContext('2d'); let w, h, stars = [], comets = [];
+  const size = () => { w = c.width = innerWidth; h = c.height = innerHeight;
+    stars = Array.from({ length: Math.round(w * h / 5000) }, () => ({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.4 + .2, p: Math.random() * 6.28, d: Math.random() * .6 + .1, blue: Math.random() < .3 })); };
+  addEventListener('resize', size); size();
+  (function tick(tm) {
+    requestAnimationFrame(tick);
+    if (document.hidden) return;
+    x.clearRect(0, 0, w, h);
+    const sy = scrollY;
+    for (const s of stars) {
+      const a = .35 + .65 * Math.abs(Math.sin(s.p + tm / 900 * s.d)), y = ((s.y - sy * s.d * .15) % h + h) % h;
+      x.fillStyle = s.blue ? `rgba(140,200,255,${a})` : `rgba(255,244,220,${a})`;
+      x.beginPath(); x.arc(s.x, y, s.r, 0, 7); x.fill();
+    }
+    if (!reduce && comets.length < 2 && Math.random() < .004) comets.push({ x: Math.random() * w * .8, y: Math.random() * h * .4, vx: 6 + Math.random() * 5, vy: 2 + Math.random() * 2.5, life: 1 });
+    comets = comets.filter(k => (k.life -= .012) > 0);
+    for (const k of comets) {
+      k.x += k.vx; k.y += k.vy;
+      const g = x.createLinearGradient(k.x, k.y, k.x - k.vx * 22, k.y - k.vy * 22);
+      g.addColorStop(0, `rgba(220,240,255,${k.life})`); g.addColorStop(1, 'rgba(108,192,255,0)');
+      x.strokeStyle = g; x.lineWidth = 2; x.beginPath(); x.moveTo(k.x, k.y); x.lineTo(k.x - k.vx * 22, k.y - k.vy * 22); x.stroke();
+    }
+  })(0);
+})();
 </script>
 </body>
 </html>

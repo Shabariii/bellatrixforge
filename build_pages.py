@@ -1,4 +1,33 @@
 """Builds bellatrix/index.html and battles/index.html from the home page's style and scripts."""
+STARS = """
+// A living sky behind the page: twinkling stars that drift with the scroll, and now and then a comet.
+(() => {
+  const c = document.getElementById('stars'); if (!c) return;
+  const x = c.getContext('2d'); let w, h, stars = [], comets = [];
+  const size = () => { w = c.width = innerWidth; h = c.height = innerHeight;
+    stars = Array.from({ length: Math.round(w * h / 5000) }, () => ({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.4 + .2, p: Math.random() * 6.28, d: Math.random() * .6 + .1, blue: Math.random() < .3 })); };
+  addEventListener('resize', size); size();
+  (function tick(tm) {
+    requestAnimationFrame(tick);
+    if (document.hidden) return;
+    x.clearRect(0, 0, w, h);
+    const sy = scrollY;
+    for (const s of stars) {
+      const a = .35 + .65 * Math.abs(Math.sin(s.p + tm / 900 * s.d)), y = ((s.y - sy * s.d * .15) % h + h) % h;
+      x.fillStyle = s.blue ? `rgba(140,200,255,${a})` : `rgba(255,244,220,${a})`;
+      x.beginPath(); x.arc(s.x, y, s.r, 0, 7); x.fill();
+    }
+    if (!reduce && comets.length < 2 && Math.random() < .004) comets.push({ x: Math.random() * w * .8, y: Math.random() * h * .4, vx: 6 + Math.random() * 5, vy: 2 + Math.random() * 2.5, life: 1 });
+    comets = comets.filter(k => (k.life -= .012) > 0);
+    for (const k of comets) {
+      k.x += k.vx; k.y += k.vy;
+      const g = x.createLinearGradient(k.x, k.y, k.x - k.vx * 22, k.y - k.vy * 22);
+      g.addColorStop(0, `rgba(220,240,255,${k.life})`); g.addColorStop(1, 'rgba(108,192,255,0)');
+      x.strokeStyle = g; x.lineWidth = 2; x.beginPath(); x.moveTo(k.x, k.y); x.lineTo(k.x - k.vx * 22, k.y - k.vy * 22); x.stroke();
+    }
+  })(0);
+})();
+"""
 SITE = r'C:\Users\bruno\Claude Code\bellatrix-forge-site'
 home = open(SITE + r'\index.html', encoding='utf-8').read()
 style = home[home.index('<style>'):home.index('</style>') + 8].replace('url(img/', 'url(../img/')
@@ -11,9 +40,12 @@ engine = engine.replace("filmChapter(document.getElementById('top'));", '').repl
 engine = engine.replace("// Gallery: vertical scroll slides the screenshots sideways.\nconst track", "// Gallery: vertical scroll slides the screenshots sideways.\nconst track")
 engine = engine.replace("const track = document.querySelector('.track');\ngsap.to(track",
                         "const track = document.querySelector('.track');\nif (track) gsap.to(track")
-engine = engine.replace('</script>', "document.querySelectorAll('.film').forEach(filmChapter);\n</script>")
+engine = engine.replace('</script>', "document.querySelectorAll('.film').forEach(filmChapter);\n" + STARS + "</script>")
+
 
 EXTRA = '''<style>
+html { background:var(--night); } body.sky { background:transparent; }
+#stars { position:fixed; inset:0; width:100%; height:100%; z-index:-1; pointer-events:none; }
 .page-sec { padding:12vh clamp(16px,6vw,96px); max-width:1760px; margin:auto; }
 .page-sec h2.big { font:900 clamp(36px,5.4vw,92px)/1 "Cinzel Decorative", serif; margin:.3em 0 .5em; }
 .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr)); gap:clamp(18px,2.4vw,40px); counter-reset:s; }
@@ -67,7 +99,8 @@ def page(title, desc, og, nav, body):
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800;900&family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=IBM+Plex+Mono:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 {style}
 {EXTRA}</head>
-<body>
+<body class="sky">
+<canvas id="stars" aria-hidden="true"></canvas>
 <div class="progress"></div>
 <canvas id="embers" aria-hidden="true"></canvas>
 <header class="bar">
@@ -160,9 +193,8 @@ bx = page('BELLATRIX', 'BELLATRIX, a space-opera bullet heaven. The blue giant o
   <h2 class="big reveal flame">Roadmap</h2>
   <div class="road">
     <div class="mile done reveal"><span>Now</span><b>Free demo</b><p>Playable in your browser on itch.io: the first zone and its three fortresses.</p></div>
-    <div class="mile reveal"><span>Next</span><b>Steam page</b><p>Wishlists open as soon as the page is approved.</p></div>
-    <div class="mile reveal"><span>To be confirmed</span><b>Steam Next Fest</b><p>The demo on Steam during a festival.</p></div>
-    <div class="mile reveal"><span>To be confirmed</span><b>Full release</b><p>Three corrupted zones, Endless mode and HARD difficulty.</p></div>
+    <div class="mile reveal"><span>To be confirmed</span><b>Early Access</b><p>BELLATRIX on Steam while the campaign grows: new zones, weapons and fortresses as they are forged.</p></div>
+    <div class="mile reveal"><span>To be confirmed</span><b>Launch</b><p>The full campaign across three corrupted zones, Endless mode and HARD difficulty.</p></div>
   </div>
 </section>
 
